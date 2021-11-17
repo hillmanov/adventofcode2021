@@ -12,15 +12,15 @@ define GO_FILE_TEMPLATE
 package main
 
 import (
-	"adventofcode/utils"
+	. "adventofcode/utils"
 	"fmt"
 )
 
-func Part1() *int {
+func Part1() Any {
 	return nil
 }
 
-func Part2() *int {
+func Part2() Any {
 	return nil
 }
 
@@ -43,8 +43,15 @@ init:
 	@touch day${day}/input.txt
 	@touch day${day}/README.md
 
+run-current:
+	@go run ./runner.go --command runCurrent
+
+run-all:
+	@go run ./runner.go --command runAll
+
+build-current:
+	@go build ./buildner.go --command buildCurrent
+
 build-all:
+	@go build ./buildner.go --command buildAll
 
-time-all:
-
-time:

@@ -7,6 +7,8 @@ import (
 	"strconv"
 )
 
+type Any interface{}
+
 func ReadLines(filename string) ([]string, error) {
 	f, err := os.Open(filename)
 	if err != nil {
