@@ -3,9 +3,11 @@ package main
 import (
 	. "adventofcode/utils"
 	"fmt"
+	"time"
 )
 
 func Part1() Any {
+	time.Sleep(1500 * time.Millisecond)
 	return 5
 }
 

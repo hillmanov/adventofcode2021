@@ -50,8 +50,8 @@ run-all:
 	@go run ./runner.go --command runAll
 
 build-current:
-	@go build ./buildner.go --command buildCurrent
+	@go build ./runner.go --command buildCurrent
 
 build-all:
-	@go build ./buildner.go --command buildAll
+	@go build ./runner.go --command buildAll
 
