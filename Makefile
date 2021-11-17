@@ -43,6 +43,9 @@ init:
 	@touch day${day}/input.txt
 	@touch day${day}/README.md
 
+new:
+	@go run ./runner.go --command new
+
 run-current:
 	@go run ./runner.go --command runCurrent
 
@@ -50,8 +53,8 @@ run-all:
 	@go run ./runner.go --command runAll
 
 build-current:
-	@go build ./runner.go --command buildCurrent
+	@go run ./runner.go --command buildCurrent
 
 build-all:
-	@go build ./runner.go --command buildAll
+	@go run ./runner.go --command buildAll
 

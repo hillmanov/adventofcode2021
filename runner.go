@@ -46,6 +46,8 @@ func main() {
 	flag.Parse()
 
 	switch *command {
+	case "new":
+		new()
 	case "runCurrent":
 		runCurrent()
 	case "runAll":
@@ -55,6 +57,22 @@ func main() {
 	case "buildAll":
 		buildAll()
 	}
+}
+
+func new() {
+	currentDay := getCurrentDay()
+	if len(currentDay) == 0 {
+		currentDay = "day0"
+	}
+	currentDayNum := getDayNum(currentDay)
+	nextDayNum := currentDayNum + 1
+	nextDay := fmt.Sprintf("%02d", nextDayNum)
+
+	cmd := exec.Command("make", "day="+nextDay)
+	if _, err := cmd.Output(); err != nil {
+		log.Fatal("Error creating new day")
+	}
+	log.Printf("Created new day: day%s", nextDay)
 }
 
 func buildCurrent() error {
@@ -143,6 +161,9 @@ func runDay(day string) ([]RunResult, error) {
 
 func getCurrentDay() string {
 	days := getDays()
+	if len(days) == 0 {
+		return ""
+	}
 	return days[len(days)-1]
 }
 
