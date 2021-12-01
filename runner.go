@@ -77,7 +77,7 @@ func new() {
 
 func buildCurrent() error {
 	currentDay := getCurrentDay()
-	log.Printf("Building %s", currentDay)
+	log.Printf("Building %s...", currentDay)
 
 	return buildDay(currentDay)
 }
@@ -138,7 +138,7 @@ func runDay(day string) ([]RunResult, error) {
 	part1 := part1Symbol.(func() Any)
 	part2 := part2Symbol.(func() Any)
 
-	log.Printf("Running %s", day)
+	log.Printf("Running %s...", day)
 
 	part1Result := RunResult{
 		Day:       getDayNum(day),

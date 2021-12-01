@@ -2,23 +2,22 @@ package utils
 
 import (
 	"bufio"
-	"io/ioutil"
-	"os"
+	"embed"
 	"strconv"
 )
 
 type Any interface{}
 
-func ReadLines(filename string) ([]string, error) {
-	f, err := os.Open(filename)
+func ReadLines(f embed.FS, filename string) ([]string, error) {
+	file, err := f.Open(filename)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer file.Close()
 
 	s := []string{}
 
-	scanner := bufio.NewScanner(f)
+	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		s = append(s, scanner.Text())
 	}
@@ -26,16 +25,16 @@ func ReadLines(filename string) ([]string, error) {
 	return s, nil
 }
 
-func ReadInts(filename string) ([]int, error) {
-	f, err := os.Open(filename)
+func ReadInts(f embed.FS, filename string) ([]int, error) {
+	file, err := f.Open(filename)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer file.Close()
 
 	i := []int{}
 
-	scanner := bufio.NewScanner(f)
+	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
 		n, err := strconv.Atoi(line)
@@ -48,8 +47,8 @@ func ReadInts(filename string) ([]int, error) {
 	return i, nil
 }
 
-func ReadContents(filename string) (string, error) {
-	contents, err := ioutil.ReadFile("./input.txt")
+func ReadContents(f embed.FS, filename string) (string, error) {
+	contents, err := f.ReadFile("./input.txt")
 	if err != nil {
 		return "", err
 	}
