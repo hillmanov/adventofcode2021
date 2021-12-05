@@ -34,7 +34,7 @@ func (b *board) MarkNum(n int) {
 	}
 }
 
-func (b *board) HasWin() bool {
+func (b *board) HasBingo() bool {
 	rowWin := true
 	colWin := true
 
@@ -72,7 +72,7 @@ func Part1() Any {
 	for _, callNum := range callNums {
 		for _, board := range boards {
 			board.MarkNum(callNum)
-			if board.HasWin() {
+			if board.HasBingo() {
 				return callNum * board.Score()
 			}
 		}
@@ -91,7 +91,7 @@ func Part2() Any {
 				continue
 			}
 			board.MarkNum(callNum)
-			if board.HasWin() {
+			if board.HasBingo() {
 				boardsToSkip[boardIndex] = true
 			}
 
