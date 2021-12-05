@@ -59,6 +59,14 @@ func ReplaceAtIndex(str string, replacement string, index int) string {
 	return str[:index] + replacement + str[index+1:]
 }
 
+func ParseInt(s string) int {
+	v, err := strconv.Atoi(s)
+	if err != nil {
+		panic(err)
+	}
+	return v
+}
+
 func MinInt(a, b int) int {
 	if a < b {
 		return a
