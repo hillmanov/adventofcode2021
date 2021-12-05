@@ -5,7 +5,6 @@ import (
 	"embed"
 	"fmt"
 	"regexp"
-	"strconv"
 	"strings"
 )
 
@@ -65,21 +64,6 @@ func (b *board) Score() int {
 		}
 	}
 	return score
-}
-
-func (b *board) String() string {
-	board := "\n"
-	for i := range b.Squares {
-		for j := range b.Squares[i] {
-			if b.Squares[i][j].Marked {
-				board += "(" + strconv.Itoa(b.Squares[i][j].Num) + ") "
-			} else {
-				board += strconv.Itoa(b.Squares[i][j].Num) + " "
-			}
-		}
-		board += "\n"
-	}
-	return board
 }
 
 func Part1() Any {
