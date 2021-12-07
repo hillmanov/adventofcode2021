@@ -12,34 +12,21 @@ var f embed.FS
 
 func Part1() Any {
 	fishCycles := getInput()
-
-	for day := 0; day < 80; day++ {
-		nextFishCycles := []int{}
-		newFishCycles := []int{}
-		for _, n := range fishCycles {
-			if n == 0 {
-				nextFishCycles = append(nextFishCycles, 6)
-				newFishCycles = append(newFishCycles, 8)
-			} else {
-				nextFishCycles = append(nextFishCycles, n-1)
-			}
-		}
-		nextFishCycles = append(nextFishCycles, newFishCycles...)
-		fishCycles = nextFishCycles
-	}
-
-	return len(fishCycles)
+	return simulate(fishCycles, 80)
 }
 
 func Part2() Any {
 	fishCycles := getInput()
+	return simulate(fishCycles, 256)
+}
 
+func simulate(fishCycles []int, days int) int {
 	dayCycleCounts := [9]int{}
 	for _, n := range fishCycles {
 		dayCycleCounts[n]++
 	}
 
-	for day := 0; day < 256; day++ {
+	for day := 0; day < days; day++ {
 		nextDayCycleCounts := [9]int{}
 		createAndResetCount := dayCycleCounts[0]
 		for i := 0; i < 8; i++ {
