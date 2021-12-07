@@ -11,17 +11,50 @@ import (
 var f embed.FS
 
 func Part1() Any {
-	nums := getInput()
+	fishCycles := getInput()
 
-	for day := 0; day <= 18; day++ {
-		nextNums
+	for day := 0; day < 80; day++ {
+		nextFishCycles := []int{}
+		newFishCycles := []int{}
+		for _, n := range fishCycles {
+			if n == 0 {
+				nextFishCycles = append(nextFishCycles, 6)
+				newFishCycles = append(newFishCycles, 8)
+			} else {
+				nextFishCycles = append(nextFishCycles, n-1)
+			}
+		}
+		nextFishCycles = append(nextFishCycles, newFishCycles...)
+		fishCycles = nextFishCycles
 	}
 
-	return nil
+	return len(fishCycles)
 }
 
 func Part2() Any {
-	return nil
+	nums := getInput()
+
+	dayCycleCounts := [9]int{}
+	for _, n := range nums {
+		dayCycleCounts[n]++
+	}
+
+	for day := 0; day < 256; day++ {
+		nextDayCycleCounts := [9]int{}
+		createAndResetCount := dayCycleCounts[0]
+		for i := 0; i < 8; i++ {
+			nextDayCycleCounts[i] = dayCycleCounts[i+1]
+		}
+		nextDayCycleCounts[6] = nextDayCycleCounts[6] + createAndResetCount
+		nextDayCycleCounts[8] = nextDayCycleCounts[8] + createAndResetCount
+		dayCycleCounts = nextDayCycleCounts
+	}
+
+	sum := 0
+	for _, n := range dayCycleCounts {
+		sum += n
+	}
+	return sum
 }
 
 func getInput() []int {
