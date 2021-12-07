@@ -4,6 +4,7 @@ import (
 	. "adventofcode/utils"
 	"embed"
 	"fmt"
+	"math"
 	"sort"
 	"strings"
 )
@@ -24,7 +25,17 @@ func Part1() Any {
 }
 
 func Part2() Any {
-	return nil
+	positions := getInput()
+	sort.Ints(positions)
+
+	bestFuelCost := math.MaxInt
+	for position := range positions {
+		if totalFuelCostForPosition(positions, position) < bestFuelCost {
+			bestFuelCost = totalFuelCostForPosition(positions, position)
+		}
+	}
+
+	return bestFuelCost
 }
 
 func getInput() []int {
@@ -38,17 +49,29 @@ func getInput() []int {
 	return positions
 }
 
+func abs(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
+
+func totalFuelCostForPosition(positions []int, position int) int {
+	cost := 0
+	for _, p := range positions {
+		cost += fuelCostAtDistance(abs(p - position))
+	}
+	return cost
+}
+
+func fuelCostAtDistance(dist int) int {
+	return ((dist * dist) + dist) / 2
+}
+
 func main() {
 	part1Solution := Part1()
 	part2Solution := Part2()
 
 	fmt.Printf("Day 07: Part 1: = %+v\n", part1Solution)
 	fmt.Printf("Day 07: Part 2: = %+v\n", part2Solution)
-}
-
-func abs(n int) int {
-	if n < 0 {
-		return -n
-	}
-	return n
 }
