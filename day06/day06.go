@@ -32,10 +32,10 @@ func Part1() Any {
 }
 
 func Part2() Any {
-	nums := getInput()
+	fishCycles := getInput()
 
 	dayCycleCounts := [9]int{}
-	for _, n := range nums {
+	for _, n := range fishCycles {
 		dayCycleCounts[n]++
 	}
 
@@ -61,11 +61,11 @@ func getInput() []int {
 	contents, _ := ReadContents(f, "input.txt")
 	parts := strings.Split(strings.Trim(contents, "\n"), ",")
 
-	nums := []int{}
+	fishCycles := []int{}
 	for _, num := range parts {
-		nums = append(nums, ParseInt(num))
+		fishCycles = append(fishCycles, ParseInt(num))
 	}
-	return nums
+	return fishCycles
 }
 
 func main() {
