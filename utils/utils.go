@@ -48,7 +48,7 @@ func ReadInts(f embed.FS, filename string) ([]int, error) {
 }
 
 func ReadContents(f embed.FS, filename string) (string, error) {
-	contents, err := f.ReadFile("./input.txt")
+	contents, err := f.ReadFile(filename)
 	if err != nil {
 		return "", err
 	}
