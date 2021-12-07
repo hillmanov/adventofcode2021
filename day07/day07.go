@@ -30,8 +30,9 @@ func Part2() Any {
 
 	bestFuelCost := math.MaxInt
 	for position := range positions {
-		if totalFuelCostForPosition(positions, position) < bestFuelCost {
-			bestFuelCost = totalFuelCostForPosition(positions, position)
+		checkFuelCost := totalFuelCostForPosition(positions, position)
+		if checkFuelCost < bestFuelCost {
+			bestFuelCost = checkFuelCost
 		}
 	}
 
