@@ -4,29 +4,134 @@ import (
 	. "adventofcode/utils"
 	"embed"
 	"fmt"
+	"strconv"
 	"strings"
 )
 
 //go:embed input.txt
-var f embed.FS
+var fe embed.FS
+
+var maskVal = map[string]int{
+	"a": 1,
+	"b": 2,
+	"c": 4,
+	"d": 8,
+	"e": 16,
+	"f": 32,
+	"g": 64,
+}
+
+type pattern string
+
+func (p pattern) Mask() int {
+	val := 0x000000
+	for _, c := range p {
+		val |= maskVal[string(c)]
+	}
+	return val
+}
+
+func (p pattern) String() string {
+	return string(p)
+}
 
 type entry struct {
-	SignalPatterns [10]string
-	OutputValues   [4]string
+	SignalPatterns [10]pattern
+	OutputValues   [4]pattern
 }
 
 func Part1() Any {
 	entries := getInput()
 
-	return nil
+	countOfOnesFoursSevensAndEights := 0
+	for _, entry := range entries {
+		for _, v := range entry.OutputValues {
+			switch len(v) {
+			case 2, 3, 4, 7:
+				countOfOnesFoursSevensAndEights++
+			}
+		}
+	}
+
+	return countOfOnesFoursSevensAndEights
 }
 
 func Part2() Any {
-	return nil
+	entries := getInput()
+
+	outputValues := []int{}
+	for _, entry := range entries {
+		d := decode(entry.SignalPatterns)
+
+		outputValue := []string{}
+		for _, out := range entry.OutputValues {
+			outputValue = append(outputValue, strconv.Itoa(d[out.Mask()]))
+		}
+		t := strings.Join(outputValue, "")
+		o, _ := strconv.Atoi(t)
+		outputValues = append(outputValues, o)
+	}
+
+	return SumOf(outputValues)
+}
+
+func decode(patterns [10]pattern) map[int]int {
+	decoded := map[int]int{}
+	maskOf := map[int]int{}
+	// 1, 4, 7, 8
+	for _, p := range patterns {
+		switch len(p) {
+		case 2:
+			decoded[p.Mask()] = 1
+			maskOf[1] = p.Mask()
+		case 4:
+			decoded[p.Mask()] = 4
+			maskOf[4] = p.Mask()
+		case 3:
+			decoded[p.Mask()] = 7
+			maskOf[7] = p.Mask()
+		case 7:
+			decoded[p.Mask()] = 8
+			maskOf[8] = p.Mask()
+		}
+	}
+
+	for _, p := range patterns {
+		switch {
+		// 2
+		case len(p) == 5 && p.Mask()&(maskOf[4]^maskOf[1]) != maskOf[4]^maskOf[1] && (p.Mask()&maskOf[1]&maskOf[7] != maskOf[1]&maskOf[7]):
+			decoded[p.Mask()] = 2
+
+		// 3
+		case len(p) == 5 && p.Mask()&maskOf[1]&maskOf[7] == maskOf[1]&maskOf[7]:
+			decoded[p.Mask()] = 3
+
+		// 5
+		case len(p) == 5 && p.Mask()&(maskOf[4]^maskOf[1]) == maskOf[4]^maskOf[1]:
+			decoded[p.Mask()] = 5
+
+		// 6
+		case len(p) == 6 && p.Mask()&maskOf[4]&maskOf[7] != maskOf[4]&maskOf[7]:
+			decoded[p.Mask()] = 6
+
+		// 9
+		case len(p) == 6 && p.Mask()&maskOf[4] == maskOf[4]:
+			decoded[p.Mask()] = 9
+		}
+	}
+
+	// Easier to find 0 by process of elimination
+	for _, p := range patterns {
+		if _, ok := decoded[p.Mask()]; !ok {
+			decoded[p.Mask()] = 0
+		}
+	}
+
+	return decoded
 }
 
 func getInput() []entry {
-	lines, _ := ReadLines(f, "input.txt")
+	lines, _ := ReadLines(fe, "input.txt")
 
 	entries := []entry{}
 	for _, line := range lines {
