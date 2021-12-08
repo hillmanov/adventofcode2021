@@ -63,35 +63,36 @@ func Part2() Any {
 	for _, entry := range entries {
 		d := decode(entry.SignalPatterns)
 
-		outputValue := []string{}
+		displayValue := ""
 		for _, out := range entry.OutputValues {
-			outputValue = append(outputValue, strconv.Itoa(d[out.Mask()]))
+			displayValue += strconv.Itoa(d[out.Mask()])
 		}
-		t := strings.Join(outputValue, "")
-		o, _ := strconv.Atoi(t)
-		outputValues = append(outputValues, o)
+
+		outputValue, _ := strconv.Atoi(displayValue)
+		outputValues = append(outputValues, outputValue)
 	}
 
 	return SumOf(outputValues)
 }
 
 func decode(patterns [10]pattern) map[int]int {
-	decoded := map[int]int{}
+	maskToDigit := map[int]int{}
 	maskOf := map[int]int{}
+
 	// 1, 4, 7, 8
 	for _, p := range patterns {
 		switch len(p) {
 		case 2:
-			decoded[p.Mask()] = 1
+			maskToDigit[p.Mask()] = 1
 			maskOf[1] = p.Mask()
 		case 4:
-			decoded[p.Mask()] = 4
+			maskToDigit[p.Mask()] = 4
 			maskOf[4] = p.Mask()
 		case 3:
-			decoded[p.Mask()] = 7
+			maskToDigit[p.Mask()] = 7
 			maskOf[7] = p.Mask()
 		case 7:
-			decoded[p.Mask()] = 8
+			maskToDigit[p.Mask()] = 8
 			maskOf[8] = p.Mask()
 		}
 	}
@@ -100,34 +101,34 @@ func decode(patterns [10]pattern) map[int]int {
 		switch {
 		// 2
 		case len(p) == 5 && p.Mask()&(maskOf[4]^maskOf[1]) != maskOf[4]^maskOf[1] && (p.Mask()&maskOf[1]&maskOf[7] != maskOf[1]&maskOf[7]):
-			decoded[p.Mask()] = 2
+			maskToDigit[p.Mask()] = 2
 
 		// 3
 		case len(p) == 5 && p.Mask()&maskOf[1]&maskOf[7] == maskOf[1]&maskOf[7]:
-			decoded[p.Mask()] = 3
+			maskToDigit[p.Mask()] = 3
 
 		// 5
 		case len(p) == 5 && p.Mask()&(maskOf[4]^maskOf[1]) == maskOf[4]^maskOf[1]:
-			decoded[p.Mask()] = 5
+			maskToDigit[p.Mask()] = 5
 
 		// 6
 		case len(p) == 6 && p.Mask()&maskOf[4]&maskOf[7] != maskOf[4]&maskOf[7]:
-			decoded[p.Mask()] = 6
+			maskToDigit[p.Mask()] = 6
 
 		// 9
 		case len(p) == 6 && p.Mask()&maskOf[4] == maskOf[4]:
-			decoded[p.Mask()] = 9
+			maskToDigit[p.Mask()] = 9
 		}
 	}
 
-	// Easier to find 0 by process of elimination
+	// Easier to find 0 just by looking for the one that we haven't found yet
 	for _, p := range patterns {
-		if _, ok := decoded[p.Mask()]; !ok {
-			decoded[p.Mask()] = 0
+		if _, ok := maskToDigit[p.Mask()]; !ok {
+			maskToDigit[p.Mask()] = 0
 		}
 	}
 
-	return decoded
+	return maskToDigit
 }
 
 func getInput() []entry {
