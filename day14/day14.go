@@ -74,14 +74,6 @@ func Part2() Any {
 	return max - min
 }
 
-func dump(counter map[string]int) {
-	for p, c := range counter {
-		if c > 0 {
-			fmt.Printf("%s: %d\n", p, c)
-		}
-	}
-}
-
 func step(counter map[string]int, rules map[string]string) map[string]int {
 	pairCounter := createPairCounter(rules)
 
