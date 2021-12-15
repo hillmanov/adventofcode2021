@@ -5,7 +5,6 @@ import (
 	"embed"
 	"fmt"
 	"strconv"
-	"strings"
 )
 
 //go:embed input.txt
@@ -138,8 +137,8 @@ func getInput() []entry {
 	for _, line := range lines {
 		e := entry{}
 
-		fmt.Fscanf(
-			strings.NewReader(line),
+		fmt.Sscanf(
+			line,
 			"%s %s %s %s %s %s %s %s %s %s | %s %s %s %s",
 			&e.SignalPatterns[0],
 			&e.SignalPatterns[1],

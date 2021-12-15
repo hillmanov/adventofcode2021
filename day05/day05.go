@@ -4,7 +4,6 @@ import (
 	. "adventofcode/utils"
 	"embed"
 	"fmt"
-	"strings"
 )
 
 //go:embed input.txt
@@ -101,7 +100,7 @@ func getInput() []line {
 	lines := []line{}
 	for _, input := range inputs {
 		l := line{}
-		fmt.Fscanf(strings.NewReader(input), "%d,%d -> %d,%d", &l.Start.X, &l.Start.Y, &l.End.X, &l.End.Y)
+		fmt.Sscanf(input, "%d,%d -> %d,%d", &l.Start.X, &l.Start.Y, &l.End.X, &l.End.Y)
 		lines = append(lines, l)
 	}
 

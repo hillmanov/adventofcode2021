@@ -4,7 +4,6 @@ import (
 	. "adventofcode/utils"
 	"embed"
 	"fmt"
-	"strings"
 )
 
 type command struct {
@@ -70,7 +69,7 @@ func getInput() []command {
 	commands := []command{}
 	for _, line := range lines {
 		c := command{}
-		fmt.Fscanf(strings.NewReader(line), "%s %d", &c.Direction, &c.Units)
+		fmt.Sscanf(line, "%s %d", &c.Direction, &c.Units)
 		commands = append(commands, c)
 	}
 
