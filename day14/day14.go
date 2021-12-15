@@ -19,13 +19,30 @@ type elementCount struct {
 func Part1() Any {
 	template, rules := getInput()
 
-	for i := 0; i < 10; i++ {
-		template = step(template, rules)
+	// Initialize first counts
+	counter := createPairCounter(rules)
+	for _, p := range getPairs(template) {
+		counter[p]++
 	}
 
-	mostCommonCount, leastCommonCount := minMaxElementCounts(template)
+	for i := 0; i < 9; i++ {
+		counter = step(counter, rules)
+	}
 
-	return mostCommonCount - leastCommonCount
+	// Calculate final counts
+	elementCounts := map[string]int{}
+	for p, c := range counter {
+		if c > 0 {
+			element := rules[p]
+			elementCounts[string(p[0])] += c
+			elementCounts[element] += c
+		}
+	}
+	elementCounts[string(template[len(template)-1])] += 1
+
+	min, max := minMaxElementCounts(elementCounts)
+
+	return max - min
 }
 
 func Part2() Any {
@@ -37,28 +54,24 @@ func Part2() Any {
 		counter[p]++
 	}
 
-	// Expand
-	for i := 0; i < 1; i++ {
-		counter = smartStep(counter, rules)
-		// dump(counter)
+	for i := 0; i < 39; i++ {
+		counter = step(counter, rules)
 	}
 
-	dump(counter)
-
-	// Single element counts
+	// Calculate final counts
 	elementCounts := map[string]int{}
 	for p, c := range counter {
 		if c > 0 {
 			element := rules[p]
-			elementCounts[string(p[0])] += 1
-			elementCounts[string(p[1])] += 1
-			elementCounts[element] += 1
+			elementCounts[string(p[0])] += c
+			elementCounts[element] += c
 		}
 	}
+	elementCounts[string(template[len(template)-1])] += 1
 
-	fmt.Printf("elementCounts = %+v\n", elementCounts)
+	min, max := minMaxElementCounts(elementCounts)
 
-	return nil
+	return max - min
 }
 
 func dump(counter map[string]int) {
@@ -69,7 +82,7 @@ func dump(counter map[string]int) {
 	}
 }
 
-func smartStep(counter map[string]int, rules map[string]string) map[string]int {
+func step(counter map[string]int, rules map[string]string) map[string]int {
 	pairCounter := createPairCounter(rules)
 
 	for p, c := range counter {
@@ -93,35 +106,17 @@ func createPairCounter(rules map[string]string) map[string]int {
 	return pairCounter
 }
 
-func minMaxElementCounts(template string) (int, int) {
-	counts := make(map[string]int)
-	for _, e := range template {
-		counts[string(e)]++
-	}
-
+func minMaxElementCounts(counter map[string]int) (int, int) {
 	elementCounts := []elementCount{}
-	for element, count := range counts {
+	for element, count := range counter {
 		elementCounts = append(elementCounts, elementCount{Element: element, Count: count})
 	}
 
 	sort.Slice(elementCounts, func(i, j int) bool {
-		return elementCounts[i].Count > elementCounts[j].Count
+		return elementCounts[i].Count < elementCounts[j].Count
 	})
 
 	return elementCounts[0].Count, elementCounts[len(elementCounts)-1].Count
-}
-
-func step(template string, rules map[string]string) string {
-	newTemplate := ""
-	for i, p := range getPairs(template) {
-		element := rules[p]
-		if i == 0 {
-			newTemplate += string(p[0]) + element + string(p[1])
-		} else {
-			newTemplate += element + string(p[1])
-		}
-	}
-	return newTemplate
 }
 
 func getPairs(t string) []string {
