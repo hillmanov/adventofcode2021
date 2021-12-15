@@ -16,123 +16,87 @@ func (c cave) IsSmall() bool {
 	return strings.ToLower(string(c)) == string(c)
 }
 
-func (c cave) IsBig() bool {
-	return !c.IsSmall()
-}
-
 type path []cave
 
-func (p path) Visits(c cave) int {
-	visits := 0
-	for _, pc := range p {
-		if pc == c {
-			visits++
-		}
-	}
-	return visits
-}
-
-func (p path) HasAnySmallCaveTwice() bool {
-	counts := map[cave]int{}
-	for _, c := range p {
-		if c.IsSmall() {
-			counts[c]++
-			if counts[c] >= 2 {
-				return true
-			}
+func hasVisitedAnySmallCaveTwice(visits map[cave]int) bool {
+	for _, c := range visits {
+		if c >= 2 {
+			return true
 		}
 	}
 	return false
 }
 
-func (p path) String() string {
-	j := ""
-	for _, c := range p {
-		j += string(c) + ","
-	}
-	return strings.Trim(j, ",")
-}
-
 func Part1() Any {
-	_, connections := getInput()
+	caveConnections := getInput()
 
-	startingPath := path{cave("start")}
+	visited := map[cave]bool{}
+	currentPath := path{}
+	paths := []path{}
 
-	fullPaths := map[string]bool{
-		startingPath.String(): true,
-	}
-	fullPaths = explore(connections, startingPath, fullPaths, false)
-
-	i := 0
-	for p := range fullPaths {
-		if strings.HasSuffix(p, "end") {
-			i++
-		}
-	}
-
-	return i
+	explore(caveConnections, cave("start"), currentPath, visited, &paths)
+	return len(paths)
 }
 
 func Part2() Any {
-	_, connections := getInput()
+	caveConnections := getInput()
 
-	startingPath := path{cave("start")}
+	// Different - we count the visits, not just if we visited
+	visited := map[cave]int{}
+	currentPath := path{}
+	paths := []path{}
 
-	fullPaths := map[string]bool{
-		startingPath.String(): true,
-	}
-	fullPaths = explore(connections, startingPath, fullPaths, true)
-
-	i := 0
-	for p := range fullPaths {
-		if strings.HasSuffix(p, "end") {
-			i++
-		}
-	}
-
-	return i
+	explore2(caveConnections, cave("start"), currentPath, visited, &paths)
+	return len(paths)
 }
-func explore(connections map[cave][]cave, workingPath path, fullPaths map[string]bool, allowDoubleVisitToSingleCave bool) map[string]bool {
-	currentCave := workingPath[len(workingPath)-1]
+
+func explore(caveConnections map[cave][]cave, currentCave cave, currentPath path, visited map[cave]bool, paths *[]path) {
+	if visited[currentCave] {
+		return
+	}
+
+	if currentCave.IsSmall() {
+		visited[currentCave] = true
+	}
+	currentPath = append(currentPath, currentCave)
 
 	if currentCave == "end" {
-		fullPaths[workingPath.String()] = true
-		return fullPaths
+		*paths = append(*paths, currentPath)
+		visited["end"] = false
+		return
 	}
-
-	for _, connectedCave := range connections[currentCave] {
-		if connectedCave == "start" {
-			continue
-		}
-
-		if connectedCave.IsSmall() {
-			if allowDoubleVisitToSingleCave {
-				if workingPath.Visits(connectedCave) == 1 && !workingPath.HasAnySmallCaveTwice() {
-					goto allowExplore
-				} else if workingPath.Visits(connectedCave) >= 1 && workingPath.HasAnySmallCaveTwice() {
-					continue
-				}
-			} else {
-				if workingPath.Visits(connectedCave) >= 1 {
-					continue
-				}
-			}
-		}
-
-	allowExplore:
-		exploreTo := make(path, len(workingPath))
-		copy(exploreTo, workingPath)
-		exploreTo = append(exploreTo, connectedCave)
-
-		for path := range explore(connections, exploreTo, fullPaths, allowDoubleVisitToSingleCave) {
-			fullPaths[path] = true
-		}
+	for _, c := range caveConnections[currentCave] {
+		explore(caveConnections, c, currentPath, visited, paths)
 	}
-
-	return fullPaths
+	visited[currentCave] = false
 }
 
-func getInput() ([]cave, map[cave][]cave) {
+func explore2(caveConnections map[cave][]cave, currentCave cave, currentPath path, visited map[cave]int, paths *[]path) {
+	if visited[currentCave] >= 1 && hasVisitedAnySmallCaveTwice(visited) {
+		return
+	}
+
+	if currentCave.IsSmall() {
+		visited[currentCave]++
+	}
+
+	currentPath = append(currentPath, currentCave)
+
+	if currentCave == "end" {
+		*paths = append(*paths, currentPath)
+		visited["end"] = 0
+		return
+	}
+	for _, c := range caveConnections[currentCave] {
+		explore2(caveConnections, c, currentPath, visited, paths)
+	}
+
+	if currentCave.IsSmall() {
+		visited[currentCave]--
+	}
+}
+
+func getInput() map[cave][]cave {
 	lines, _ := ReadLines(f, "input.txt")
 
 	caveConnections := map[cave][]cave{}
@@ -157,12 +121,7 @@ func getInput() ([]cave, map[cave][]cave) {
 		}
 	}
 
-	caves := []cave{}
-	for c := range caveConnections {
-		caves = append(caves, c)
-	}
-
-	return caves, caveConnections
+	return caveConnections
 }
 
 func main() {
