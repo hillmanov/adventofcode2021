@@ -39,30 +39,24 @@ func Part2() Any {
 				value += int(math.Floor(float64(row) / float64(len(cavern))))
 			}
 			if value > 9 {
-				value = 1
+				value = value % 9
 			}
 			if col >= len(cavern) {
-				if row == 0 {
-					fmt.Printf("%d, %d, %d\n", col, len(cavern), int(math.Floor(float64(col)/float64(len(cavern)))))
-				}
 				value += int(math.Floor(float64(col) / float64(len(cavern))))
 			}
 			if value > 9 {
-				value = 1
-			}
-			if row == 0 {
-				fmt.Printf("o: %d, n: %d\n", cavern[row%len(cavern)][col%len(cavern)], value)
+				value = value % 9
 			}
 
 			bigCavern[row][col] = value
 		}
 	}
-	for row := range bigCavern {
-		for col := range bigCavern[row] {
-			fmt.Printf("%+v", bigCavern[row][col])
-		}
-		fmt.Println("")
-	}
+	// for row := range bigCavern {
+	// 	for col := range bigCavern[row] {
+	// 		fmt.Printf("%+v", bigCavern[row][col])
+	// 	}
+	// 	fmt.Println("")
+	// }
 
 	lowestCost := findLowestRiskTotal(bigCavern)
 	return lowestCost
