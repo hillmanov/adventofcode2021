@@ -15,7 +15,7 @@ func Part1() Any {
 	transmission := getInput()
 	packet := hexToBin(transmission)
 
-	var packetVersion int64
+	var packetVersion int
 	process(packet, &packetVersion)
 
 	return packetVersion
@@ -25,14 +25,14 @@ func Part2() Any {
 	return nil
 }
 
-func process(packet string, packetVersion *int64) string {
+func process(packet string, packetVersion *int) string {
 	for len(packet) > 0 && strings.Contains(packet, "1") {
 		var version int
 		var typeID string
 		version, packet = binToInt(packet[0:3]), packet[3:]
 		typeID, packet = packet[0:3], packet[3:]
 
-		*packetVersion += int64(version)
+		*packetVersion += version
 
 		switch typeID {
 
