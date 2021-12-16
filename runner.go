@@ -211,10 +211,10 @@ func renderResults(rs []RunResult) {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Day", "Part", "Solution", "Time"})
+	table.SetHeader([]string{"Day", "Part", "Solution", "Time (milliseconds)"})
 	table.SetAutoMergeCellsByColumnIndex([]int{0})
 	table.SetRowLine(true)
-	table.SetFooter([]string{"", "", "Total", fmt.Sprintf("%.2f", totalRunTime)})
+	table.SetFooter([]string{"", "", "Total milliseconds", fmt.Sprintf("%.2f", totalRunTime)})
 	for _, v := range rs {
 		table.Append(v.tableData())
 	}
