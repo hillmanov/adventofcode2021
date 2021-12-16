@@ -51,12 +51,6 @@ func Part2() Any {
 			bigCavern[row][col] = value
 		}
 	}
-	// for row := range bigCavern {
-	// 	for col := range bigCavern[row] {
-	// 		fmt.Printf("%+v", bigCavern[row][col])
-	// 	}
-	// 	fmt.Println("")
-	// }
 
 	lowestCost := findLowestRiskTotal(bigCavern)
 	return lowestCost
@@ -65,10 +59,13 @@ func Part2() Any {
 func findLowestRiskTotal(cavern [][]int) int {
 	// Initialize distance grid
 	distances := make([][]int, len(cavern))
+
+	// Weird optimization to fill the distances with values a bit quicker
 	for i := range distances {
 		distances[i] = make([]int, len(cavern[i]))
-		for j := range distances[i] {
-			distances[i][j] = math.MaxInt
+		distances[i][0] = math.MaxInt
+		for k := 1; k < len(distances[i]); k *= 2 {
+			copy(distances[i][k:], distances[i][:k])
 		}
 	}
 
@@ -83,7 +80,6 @@ func findLowestRiskTotal(cavern [][]int) int {
 	distances[0][0] = cavern[0][0]
 
 	for len(shortestPath) != 0 {
-
 		currentNode := shortestPath[0]
 		shortestPath = shortestPath[1:]
 
@@ -98,17 +94,15 @@ func findLowestRiskTotal(cavern [][]int) int {
 			if distances[row][col] > distances[currentNode.Row][currentNode.Col]+cavern[row][col] {
 				distances[row][col] = distances[currentNode.Row][currentNode.Col] + cavern[row][col]
 				shortestPath = append(shortestPath, node{col, row, distances[row][col]})
-
 			}
 		}
 
-		sort.Slice(shortestPath, func(a, b int) bool {
-			if shortestPath[a].Distance == shortestPath[b].Distance {
-				return shortestPath[a].Row < shortestPath[b].Row
-			}
-			return shortestPath[a].Distance < shortestPath[b].Distance
-		})
-
+		// Only sort if we have to.
+		if len(shortestPath) > 1 && shortestPath[len(shortestPath)-1].Distance > shortestPath[len(shortestPath)-2].Distance {
+			sort.Slice(shortestPath, func(a, b int) bool {
+				return shortestPath[a].Distance < shortestPath[b].Distance
+			})
+		}
 	}
 
 	return distances[len(cavern)-1][len(cavern)-1] - cavern[0][0]
