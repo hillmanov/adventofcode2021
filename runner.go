@@ -12,6 +12,7 @@ import (
 	"plugin"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/olekukonko/tablewriter"
@@ -26,8 +27,8 @@ type RunResult struct {
 }
 
 // get the total time taken to run the solution
-func (r RunResult) elapsedTime() int64 {
-	return r.EndTime.Sub(r.StartTime).Milliseconds()
+func (r RunResult) elapsedTime() float64 {
+	return float64(r.EndTime.Sub(r.StartTime).Microseconds()) / 1000
 }
 
 func (r RunResult) tableData() []string {
@@ -35,7 +36,7 @@ func (r RunResult) tableData() []string {
 		strconv.Itoa(r.Day),
 		strconv.Itoa(r.Part),
 		fmt.Sprintf("%+v", r.Solution),
-		fmt.Sprintf("%d", r.elapsedTime()),
+		fmt.Sprintf("%.2f", r.elapsedTime()),
 	}
 }
 
@@ -110,10 +111,12 @@ func runAll() {
 
 	runResults := []RunResult{}
 	days := getDays()
+
 	for _, day := range days {
 		results, _ := runDay(day)
 		runResults = append(runResults, results...)
 	}
+
 	renderResults(runResults)
 }
 
@@ -140,21 +143,35 @@ func runDay(day string) ([]RunResult, error) {
 
 	log.Printf("Running %s...", day)
 
-	part1Result := RunResult{
-		Day:       getDayNum(day),
-		Part:      1,
-		StartTime: time.Now(),
-	}
-	part1Result.Solution = part1()
-	part1Result.EndTime = time.Now()
+	wg := sync.WaitGroup{}
 
-	part2Result := RunResult{
-		Day:       getDayNum(day),
-		Part:      2,
-		StartTime: time.Now(),
-	}
-	part2Result.Solution = part2()
-	part2Result.EndTime = time.Now()
+	wg.Add(1)
+	var part1Result RunResult
+	go func() {
+		part1Result = RunResult{
+			Day:       getDayNum(day),
+			Part:      1,
+			StartTime: time.Now(),
+		}
+		part1Result.Solution = part1()
+		part1Result.EndTime = time.Now()
+		wg.Done()
+	}()
+
+	wg.Add(1)
+	var part2Result RunResult
+	go func() {
+		part2Result = RunResult{
+			Day:       getDayNum(day),
+			Part:      2,
+			StartTime: time.Now(),
+		}
+		part2Result.Solution = part2()
+		part2Result.EndTime = time.Now()
+		wg.Done()
+	}()
+
+	wg.Wait()
 
 	return []RunResult{part1Result, part2Result}, nil
 }
@@ -188,7 +205,7 @@ func getDays() []string {
 }
 
 func renderResults(rs []RunResult) {
-	totalRunTime := int64(0)
+	totalRunTime := float64(0)
 	for _, r := range rs {
 		totalRunTime += r.elapsedTime()
 	}
@@ -197,7 +214,7 @@ func renderResults(rs []RunResult) {
 	table.SetHeader([]string{"Day", "Part", "Solution", "Time"})
 	table.SetAutoMergeCellsByColumnIndex([]int{0})
 	table.SetRowLine(true)
-	table.SetFooter([]string{"", "", "Total", strconv.Itoa(int(totalRunTime))})
+	table.SetFooter([]string{"", "", "Total", fmt.Sprintf("%.2f", totalRunTime)})
 	for _, v := range rs {
 		table.Append(v.tableData())
 	}
