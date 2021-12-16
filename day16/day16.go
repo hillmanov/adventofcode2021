@@ -27,7 +27,6 @@ func Part2() Any {
 
 func process(packet string, packetVersion *int64) string {
 	for len(packet) > 0 && strings.Contains(packet, "1") {
-
 		var version int
 		var typeID string
 		version, packet = binToInt(packet[0:3]), packet[3:]
@@ -56,7 +55,7 @@ func process(packet string, packetVersion *int64) string {
 
 			switch lengthTypeID {
 
-			case "0": // Next 15 bits contain bin number that says how many bits the next sub packets are
+			case "0": // Next 15 bits contain bin number that says how many bits the next sub packet(s) is/are
 				var subPacketLength int
 				var subPacket string
 
