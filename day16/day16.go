@@ -101,13 +101,10 @@ func process(packet string) (string, PacketExpression) {
 }
 
 func sumOfVersions(pe PacketExpression) int {
-	sum := 0
-
-	sum += pe.Version
+	sum := pe.Version
 	for _, subPE := range pe.PacketExpressions {
 		sum += sumOfVersions(subPE)
 	}
-
 	return sum
 }
 
