@@ -17,6 +17,10 @@ type target struct {
 	MaxY int
 }
 
+func (t target) MinAndMax() (int, int) {
+	return MinInt(t.MinX, t.MinY), MaxInt(t.MaxX, t.MaxY)
+}
+
 type probe struct {
 	X         int
 	Y         int
@@ -40,9 +44,11 @@ func (p *probe) Step() {
 func Part1() Any {
 	t := getInput()
 
+	min, max := t.MinAndMax()
+
 	maxY := math.MinInt
-	for velocityX := -250; velocityX <= 250; velocityX++ {
-		for velocityY := -250; velocityY <= 250; velocityY++ {
+	for velocityX := min; velocityX <= max; velocityX++ {
+		for velocityY := min; velocityY <= max; velocityY++ {
 			p := probe{
 				X:         0,
 				Y:         0,
@@ -50,7 +56,7 @@ func Part1() Any {
 				VelocityY: velocityY,
 			}
 			attemptMaxY := math.MinInt
-			for i := 0; i < 250; i++ {
+			for i := 0; i < max; i++ {
 				p.Step()
 				if p.X > t.MaxX || p.Y < t.MinY {
 					break
@@ -58,6 +64,7 @@ func Part1() Any {
 				attemptMaxY = MaxInt(attemptMaxY, p.Y)
 				if probeInTargetArea(p, t) {
 					maxY = MaxInt(maxY, attemptMaxY)
+					break
 				}
 			}
 		}
@@ -69,16 +76,17 @@ func Part1() Any {
 func Part2() Any {
 	t := getInput()
 
+	min, max := t.MinAndMax()
 	count := 0
-	for velocityX := -250; velocityX <= 250; velocityX++ {
-		for velocityY := -250; velocityY <= 250; velocityY++ {
+	for velocityX := min; velocityX <= max; velocityX++ {
+		for velocityY := min; velocityY <= max; velocityY++ {
 			p := probe{
 				X:         0,
 				Y:         0,
 				VelocityX: velocityX,
 				VelocityY: velocityY,
 			}
-			for i := 0; i < 300; i++ {
+			for i := 0; i < max; i++ {
 				p.Step()
 				if p.X > t.MaxX || p.Y < t.MinY {
 					break
