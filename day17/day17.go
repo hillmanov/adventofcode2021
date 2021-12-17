@@ -47,7 +47,7 @@ func Part1() Any {
 	min, max := t.MinAndMax()
 
 	maxY := math.MinInt
-	for velocityX := min; velocityX <= max; velocityX++ {
+	for velocityX := 0; velocityX <= max; velocityX++ {
 		for velocityY := min; velocityY <= max; velocityY++ {
 			p := probe{
 				X:         0,
@@ -78,7 +78,7 @@ func Part2() Any {
 
 	min, max := t.MinAndMax()
 	count := 0
-	for velocityX := min; velocityX <= max; velocityX++ {
+	for velocityX := 0; velocityX <= max; velocityX++ {
 		for velocityY := min; velocityY <= max; velocityY++ {
 			p := probe{
 				X:         0,
