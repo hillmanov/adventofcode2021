@@ -210,13 +210,28 @@ func Part2() Any {
 	return maxMag
 }
 
+var cache = map[string]int{}
+
 func getMagnitude(e interface{}) int {
+	h := hash(e)
+	if cV, ok := cache[h]; ok {
+		return cV
+	}
+
 	if v, ok := e.(float64); ok {
-		return int(v)
+		cache[h] = int(v)
+		return cache[h]
 	}
 
 	ee, _ := e.([]interface{})
-	return 3*getMagnitude(ee[0]) + 2*getMagnitude(ee[1])
+	cache[hash(ee[0])] = getMagnitude(ee[0])
+	cache[hash(ee[1])] = getMagnitude(ee[1])
+
+	return 3*cache[hash(ee[0])] + 2*cache[hash(ee[1])]
+}
+
+func hash(v interface{}) string {
+	return fmt.Sprintf("%+v", v)
 }
 
 func getInput() []Expression {
