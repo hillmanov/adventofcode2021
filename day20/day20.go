@@ -86,10 +86,10 @@ func (g Image) GetIndexForPixel(pixel Pixel, iea string, step int) int {
 func (image Image) Enhance(iea string, step int) Image {
 	enhancedImage := Image{}
 
-	// minRow, maxRow, minCol, maxCol := image.GetDimensions()
+	minRow, maxRow, minCol, maxCol := image.GetDimensions()
 
-	for row := 0 - 2 - (step * 2); row <= 100+2+(step*2); row++ {
-		for col := 0 - 2 - (step * 2); col <= 100+2+(step*2); col++ {
+	for row := minRow - 2; row <= maxRow+2; row++ {
+		for col := minCol - 2; col <= maxCol+2; col++ {
 			pixel := Pixel{Row: row, Col: col}
 			enhancedImage[pixel] = string(iea[image.GetIndexForPixel(pixel, iea, step)])
 		}
