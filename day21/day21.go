@@ -69,6 +69,15 @@ func Part1() Any {
 }
 
 func Part2() Any {
+	// From each position on the board, find out the number of turns it take to get to 21 from any given score that is before 21
+
+	for position := 1; position <= 10; position++ {
+		for startingScore := 1; startingScore <= 20; startingScore++ {
+			for roll := range []int{1, 2, 3} {
+				fmt.Printf("roll = %+v\n", roll)
+			}
+		}
+	}
 	return nil
 }
 
