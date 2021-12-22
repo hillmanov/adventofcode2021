@@ -4,6 +4,8 @@ import (
 	. "adventofcode/utils"
 	"embed"
 	"fmt"
+	"math"
+	"sort"
 	"strings"
 )
 
@@ -19,12 +21,22 @@ type Scanner struct {
 }
 
 type Beacon struct {
-	X int
-	Y int
-	Z int
+	ID           string
+	X            int
+	Y            int
+	Z            int
+	Orientations []Beacon
 }
 
-func (b Beacon) getOrientations() []Beacon {
+type VectorPair struct {
+	BeaconA Beacon
+	BeaconB Beacon
+}
+
+func (b *Beacon) getOrientations() []Beacon {
+	if b.Orientations != nil {
+		return b.Orientations
+	}
 	dX := []int{1, -1, 1, 1}
 	dY := []int{1, 1, -1, 1}
 	dZ := []int{1, 1, 1, -1}
@@ -57,31 +69,65 @@ func (b Beacon) getOrientations() []Beacon {
 
 	orientations := []Beacon{}
 	for _, r := range rotations {
-		rX, rY, rZ := r(b)
+		rX, rY, rZ := r(*b)
 
 		for i := range dX {
 			orientations = append(orientations, Beacon{
-				X: rX * dX[i],
-				Y: rY * dY[i],
-				Z: rZ * dZ[i],
+				ID: b.ID,
+				X:  rX * dX[i],
+				Y:  rY * dY[i],
+				Z:  rZ * dZ[i],
 			})
 		}
 	}
 
-	return orientations
+	b.Orientations = orientations
+
+	return b.Orientations
+}
+
+func (s Scanner) Vectors() map[float64]VectorPair {
+	vectors := map[float64]VectorPair{}
+
+	for i := 0; i < len(s.Beacons)-1; i++ {
+		for j := i + 1; j < len(s.Beacons)-1; j++ {
+			if i == j {
+				continue
+			}
+			vectors[math.Sqrt(
+				math.Pow(float64(s.Beacons[i].X)-float64(s.Beacons[j].X), 2)+
+					math.Pow(float64(s.Beacons[i].Y)-float64(s.Beacons[j].Y), 2)+
+					math.Pow(float64(s.Beacons[i].Z)-float64(s.Beacons[j].Z), 2),
+			)] = VectorPair{
+				BeaconA: s.Beacons[i],
+				BeaconB: s.Beacons[j],
+			}
+		}
+	}
+	return vectors
+
+}
+
+func CalculateVectors(beacons []Beacon) []float64 {
+	vectors := []float64{}
+	origin := beacons[0]
+	for _, b := range beacons[1:] {
+		vector := math.Sqrt(
+			math.Pow(float64(b.X)-float64(origin.X), 2) +
+				math.Pow(float64(b.Y)-float64(origin.Y), 2) +
+				math.Pow(float64(b.Z)-float64(origin.Z), 2),
+		)
+		vectors = append(vectors, vector)
+	}
+	sort.Float64s(vectors)
+	return vectors
 }
 
 func Part1() Any {
 	scanners := getInput()
 	s := scanners[0]
 
-	o := s.Beacons[0].getOrientations()
-
-	for _, oo := range o {
-		fmt.Printf("oo = %+v\n", oo)
-	}
-
-	fmt.Printf("o = %+v\n", len(o))
+	fmt.Printf("s.Vectors() = %+v\n", s.Vectors())
 
 	return nil
 }
@@ -97,6 +143,7 @@ func getInput() []Scanner {
 
 	var currentScanner Scanner
 	var beacon Beacon
+	beaconID := 0
 	for _, line := range lines {
 		switch {
 
@@ -110,9 +157,12 @@ func getInput() []Scanner {
 			scanners = append(scanners, currentScanner)
 
 		default:
-			beacon = Beacon{}
+			beacon = Beacon{
+				ID: fmt.Sprintf("%03d", beaconID),
+			}
 			fmt.Sscanf(line, "%d,%d,%d", &beacon.X, &beacon.Y, &beacon.Z)
 			currentScanner.Beacons = append(currentScanner.Beacons, beacon)
+			beaconID++
 		}
 	}
 	currentScanner.Beacons = append(currentScanner.Beacons, beacon)
