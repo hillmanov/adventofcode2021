@@ -33,6 +33,12 @@ func (c Cuboid) IsNil() bool {
 	return c.Volume() == 0
 }
 
+func (A Cuboid) Contains(B Cuboid) bool {
+	return A.MinX <= B.MinX && A.MaxX >= B.MaxY &&
+		A.MinY <= B.MinY && A.MaxY >= B.MaxY &&
+		A.MinZ <= B.MinZ && A.MaxZ >= B.MaxY
+}
+
 func (A Cuboid) Intersects(B Cuboid) bool {
 	return (MinInt(B.MaxX, A.MaxX)-MaxInt(B.MinX, A.MinX) > 0) &&
 		(MinInt(B.MaxY, A.MaxY)-MaxInt(B.MinY, A.MinY) > 0) &&
@@ -177,13 +183,85 @@ func Part1() Any {
 }
 
 func Part2() Any {
-	cuboids := getInput()
-
-	settled := []Cuboid{}
-
-	for i, cuboid := range cuboids {
-
+	a := Cuboid{
+		State: "off",
+		MinX:  -3,
+		MaxX:  3,
+		MinY:  -3,
+		MaxY:  3,
+		MinZ:  -3,
+		MaxZ:  3,
 	}
+
+	b := Cuboid{
+		State: "on",
+		MinX:  -4,
+		MaxX:  4,
+		MinY:  -4,
+		MaxY:  4,
+		MinZ:  -4,
+		MaxZ:  4,
+	}
+
+	// fmt.Printf("a.Intersects(b) = %+v, %v\n", a.Intersects(b), a.Intersection(b))
+	// fmt.Printf("a.Intersects(b) = %+v %v\n", b.Intersects(a), b.Intersection(a))
+
+	// fmt.Printf("b.Split(a) = %+v\n", b.Split(a))
+
+	// newCuboids := getInput()
+	cuboids := []Cuboid{}
+
+	newCuboids := []Cuboid{b, a}
+
+	for nI, newCuboid := range newCuboids {
+		if len(cuboids) == 0 && newCuboid.State == "on" {
+			cuboids = append(cuboids, newCuboid)
+			continue
+		}
+
+		for cI, cuboid := range cuboids {
+			if newCuboid.Intersects(cuboid) {
+
+				switch {
+				case newCuboid.State == "on" && cuboid.State == "on":
+					if newCuboid.Contains(cuboid) {
+						cuboids[cI].State = "remove"
+					} else if cuboid.Contains(newCuboid) {
+						newCuboids[nI].State = "remove"
+					} else {
+						cuboids[cI].State = "remove"
+						cuboids = append(cuboids, cuboid.Split(newCuboid)...)
+					}
+				case newCuboid.State == "off" && cuboid.State == "on": // Only "on" cuboids are added to the list, but I check here just to help me keep things straight
+					cuboids[cI].State = "remove"
+					cuboids = append(cuboids, cuboid.Split(newCuboid)...)
+				}
+			}
+		}
+
+		if newCuboid.State == "on" {
+			cuboids = append(cuboids, newCuboids[nI])
+		}
+
+		// Get rid of all the cuboids marked to remove
+		refresh := []Cuboid{}
+		for _, cuboid := range cuboids {
+			if cuboid.State == "remove" {
+				continue
+			}
+			refresh = append(refresh, cuboid)
+		}
+		cuboids = refresh
+	}
+
+	fmt.Printf("cuboids = %+v\n", cuboids)
+
+	sum := 0
+	for _, c := range cuboids {
+		sum += c.Volume()
+	}
+
+	fmt.Printf("sum = %+v\n", sum)
 
 	return nil
 }
