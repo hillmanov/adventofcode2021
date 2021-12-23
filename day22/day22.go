@@ -10,15 +10,13 @@ import (
 var f embed.FS
 
 type Cuboid struct {
-	State        string
-	MinX         int
-	MaxX         int
-	MinY         int
-	MaxY         int
-	MinZ         int
-	MaxZ         int
-	Intersectors []Cuboid
-	Absorbed     bool
+	State string
+	MinX  int
+	MaxX  int
+	MinY  int
+	MaxY  int
+	MinZ  int
+	MaxZ  int
 }
 
 type Voxel struct {
@@ -59,9 +57,80 @@ func (A Cuboid) Intersection(B Cuboid) Cuboid {
 func (A Cuboid) Split(B Cuboid) []Cuboid {
 	splits := []Cuboid{}
 
-	intersection := A.Intersection(B)
+	// X
+	if A.MinX < B.MinX {
+		splits = append(splits, Cuboid{
+			State: "on",
+			MinX:  A.MinX,
+			MaxX:  B.MinX,
+			MinY:  A.MinY,
+			MaxY:  A.MaxY,
+			MinZ:  A.MinZ,
+			MaxZ:  A.MaxZ,
+		})
+	}
 
-	// Check each plane to see if what splits we need
+	if A.MaxX > B.MaxX {
+		splits = append(splits, Cuboid{
+			State: "on",
+			MinX:  B.MaxX,
+			MaxX:  A.MaxX,
+			MinY:  B.MaxY,
+			MaxY:  A.MaxY,
+			MinZ:  A.MinZ,
+			MaxZ:  A.MaxZ,
+		})
+	}
+
+	// Y
+	if A.MinY < B.MinY {
+		splits = append(splits, Cuboid{
+			State: "on",
+			MinX:  MaxInt(A.MinX, B.MinX),
+			MaxX:  MinInt(A.MaxX, B.MaxX),
+			MinY:  A.MinY,
+			MaxY:  B.MinY,
+			MinZ:  A.MinZ,
+			MaxZ:  A.MaxZ,
+		})
+	}
+
+	if A.MaxY > B.MaxY {
+		splits = append(splits, Cuboid{
+			State: "on",
+			MinX:  MaxInt(A.MinX, B.MinX),
+			MaxX:  MinInt(A.MaxX, B.MaxX),
+			MinY:  B.MaxY,
+			MaxY:  A.MaxY,
+			MinZ:  A.MinZ,
+			MaxZ:  A.MaxZ,
+		})
+	}
+
+	// Z
+	if A.MinZ < B.MinZ {
+		splits = append(splits, Cuboid{
+			State: "on",
+			MinX:  MaxInt(A.MinX, B.MinX),
+			MaxX:  MinInt(A.MaxX, B.MaxX),
+			MinY:  MaxInt(A.MinY, B.MinY),
+			MaxY:  MinInt(A.MaxY, B.MaxY),
+			MinZ:  A.MinZ,
+			MaxZ:  B.MinZ,
+		})
+	}
+
+	if A.MaxZ > B.MaxZ {
+		splits = append(splits, Cuboid{
+			State: "on",
+			MinX:  MaxInt(A.MinX, B.MinX),
+			MaxX:  MinInt(A.MaxX, B.MaxX),
+			MinY:  MaxInt(A.MinY, B.MinY),
+			MaxY:  MinInt(A.MaxY, B.MaxY),
+			MinZ:  B.MaxZ,
+			MaxZ:  A.MaxZ,
+		})
+	}
 
 	return splits
 }
@@ -110,14 +179,11 @@ func Part1() Any {
 func Part2() Any {
 	cuboids := getInput()
 
-	// For each cuboid in the list:
-	// Check if there is an intersection:
-	// If both boxes are ON
-	// aCuboid stays the SAME
-	// bCuboid SPLITS into up to 3 different sub-cuiboids
-	//
-	// If aCuboid is ON and bCuboid is OFF
-	// aCuboid splits into 0-3 sub cubes
+	settled := []Cuboid{}
+
+	for i, cuboid := range cuboids {
+
+	}
 
 	return nil
 }
@@ -128,9 +194,7 @@ func getInput() []Cuboid {
 	steps := []Cuboid{}
 
 	for _, line := range lines {
-		step := Cuboid{
-			Intersectors: []Cuboid{},
-		}
+		step := Cuboid{}
 		fmt.Sscanf(line, "%s x=%d..%d,y=%d..%d,z=%d..%d", &step.State, &step.MinX, &step.MaxX, &step.MinY, &step.MaxY, &step.MinZ, &step.MaxZ)
 		steps = append(steps, step)
 	}
