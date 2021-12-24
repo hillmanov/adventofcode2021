@@ -1,0 +1,1783 @@
+
+verts = [(28, 22, 27), (33, 22, 27), (33, -21, 27), (28, -21, 27), (28, 22, 28), (33, 22, 28), (33, -21, 28), (28, -21, 28)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-27, -8, -21), (-22, -8, -21), (-22, -28, -21), (-27, -28, -21), (-27, -8, 29), (-22, -8, 29), (-22, -28, 29), (-27, -28, 29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-46, 41, -50), (-32, 41, -50), (-32, 26, -50), (-46, 26, -50), (-46, 41, -47), (-32, 41, -47), (-32, 26, -47), (-46, 26, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(28, 23, -2), (33, 23, -2), (33, 22, -2), (28, 22, -2), (28, 23, 28), (33, 23, 28), (33, 22, 28), (28, 22, 28)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(23, 23, -2), (28, 23, -2), (28, 22, -2), (23, 22, -2), (23, 23, 16), (28, 23, 16), (28, 22, 16), (23, 22, 16)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(5, 46, -2), (7, 46, -2), (7, 43, -2), (5, 43, -2), (5, 46, -1), (7, 46, -1), (7, 43, -1), (5, 43, -1)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(35, 22, -23), (47, 22, -23), (47, -22, -23), (35, -22, -23), (35, 22, 27), (47, 22, 27), (47, -22, 27), (35, -22, 27)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(23, 22, -2), (26, 22, -2), (26, 20, -2), (23, 20, -2), (23, 22, 27), (26, 22, 27), (26, 20, 27), (23, 20, 27)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(21, 26, -2), (23, 26, -2), (23, 20, -2), (21, 20, -2), (21, 26, 29), (23, 26, 29), (23, 20, 29), (21, 20, 29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-20, -29, -47), (-18, -29, -47), (-18, -36, -47), (-20, -36, -47), (-20, -29, 7), (-18, -29, 7), (-18, -36, 7), (-20, -36, 7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -28, -38), (-18, -28, -38), (-18, -29, -38), (-22, -29, -38), (-22, -28, 16), (-18, -28, 16), (-18, -29, 16), (-22, -29, 16)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, 43, 34), (-18, 43, 34), (-18, -6, 34), (-30, -6, 34), (-30, 43, 44), (-18, 43, 44), (-18, -6, 44), (-30, -6, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, 43, 34), (5, 43, 34), (5, 15, 34), (-18, 15, 34), (-18, 43, 44), (5, 43, 44), (5, 15, 44), (-18, 15, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(23, 20, 19), (26, 20, 19), (26, 15, 19), (23, 15, 19), (23, 20, 27), (26, 20, 27), (26, 15, 27), (23, 15, 27)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(21, 20, 19), (23, 20, 19), (23, 15, 19), (21, 15, 19), (21, 20, 29), (23, 20, 29), (23, 15, 29), (21, 15, 29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -27, -21), (-18, -27, -21), (-18, -28, -21), (-22, -28, -21), (-22, -27, 29), (-18, -27, 29), (-18, -28, 29), (-22, -28, 29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -8, 19), (-18, -8, 19), (-18, -27, 19), (-22, -27, 19), (-22, -8, 29), (-18, -8, 29), (-18, -27, 29), (-22, -27, 29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, 20, 19), (-18, 20, 19), (-18, -8, 19), (-22, -8, 19), (-22, 20, 34), (-18, 20, 34), (-18, -8, 34), (-22, -8, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, 20, 19), (21, 20, 19), (21, 15, 19), (-18, 15, 19), (-18, 20, 34), (21, 20, 34), (21, 15, 34), (-18, 15, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-20, -21, -47), (-16, -21, -47), (-16, -29, -47), (-20, -29, -47), (-20, -21, -38), (-16, -21, -38), (-16, -29, -38), (-20, -29, -38)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-20, -6, -47), (-16, -6, -47), (-16, -21, -47), (-20, -21, -47), (-20, -6, -38), (-16, -6, -38), (-16, -21, -38), (-20, -21, -38)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, -3, -50), (1, -3, -50), (1, -6, -50), (-16, -6, -50), (-16, -3, -47), (1, -3, -47), (1, -6, -47), (-16, -6, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -27, -38), (-16, -27, -38), (-16, -28, -38), (-22, -28, -38), (-22, -27, -21), (-16, -27, -21), (-16, -28, -21), (-22, -28, -21)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, 10, -50), (-12, 10, -50), (-12, -3, -50), (-16, -3, -50), (-16, 10, -47), (-12, 10, -47), (-12, -3, -47), (-16, -3, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 6, -50), (1, 6, -50), (1, -3, -50), (-12, -3, -50), (-12, 6, -47), (1, 6, -47), (1, -3, -47), (-12, -3, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(2, 6, -50), (7, 6, -50), (7, -6, -50), (2, -6, -50), (2, 6, -47), (7, 6, -47), (7, -6, -47), (2, -6, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(1, 6, -50), (2, 6, -50), (2, -6, -50), (1, -6, -50), (1, 6, -47), (2, 6, -47), (2, -6, -47), (1, -6, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(26, 22, -2), (35, 22, -2), (35, 10, -2), (26, 10, -2), (26, 22, 27), (35, 22, 27), (35, 10, 27), (26, 10, 27)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(26, 10, 6), (35, 10, 6), (35, 6, 6), (26, 6, 6), (26, 10, 27), (35, 10, 27), (35, 6, 27), (26, 6, 27)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, -33, -47), (-16, -33, -47), (-16, -36, -47), (-18, -36, -47), (-18, -33, 7), (-16, -33, 7), (-16, -36, 7), (-18, -36, 7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, -33, 6), (26, -33, 6), (26, -36, 6), (-16, -36, 6), (-16, -33, 7), (26, -33, 7), (26, -36, 7), (-16, -36, 7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, -29, -47), (-16, -29, -47), (-16, -33, -47), (-18, -33, -47), (-18, -29, -7), (-16, -29, -7), (-16, -33, -7), (-18, -33, -7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, -28, -38), (-16, -28, -38), (-16, -29, -38), (-18, -29, -38), (-18, -28, -7), (-16, -28, -7), (-16, -29, -7), (-18, -29, -7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, -27, -21), (-16, -27, -21), (-16, -28, -21), (-18, -28, -21), (-18, -27, -7), (-16, -27, -7), (-16, -28, -7), (-18, -28, -7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(26, 50, -50), (35, 50, -50), (35, 10, -50), (26, 10, -50), (26, 50, -2), (35, 50, -2), (35, 10, -2), (26, 10, -2)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(26, 10, -50), (35, 10, -50), (35, 6, -50), (26, 6, -50), (26, 10, -47), (35, 10, -47), (35, 6, -47), (26, 6, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 10, -50), (26, 10, -50), (26, 6, -50), (-12, 6, -50), (-12, 10, -47), (26, 10, -47), (26, 6, -47), (-12, 6, -47)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-49, 46, -24), (-39, 46, -24), (-39, 45, -24), (-49, 45, -24), (-49, 46, 28), (-39, 46, 28), (-39, 45, 28), (-49, 45, 28)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-49, 45, 18), (-39, 45, 18), (-39, -3, 18), (-49, -3, 18), (-49, 45, 28), (-39, 45, 28), (-39, -3, 28), (-49, -3, 28)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, 46, -24), (-27, 46, -24), (-27, 45, -24), (-30, 45, -24), (-30, 46, -3), (-27, 46, -3), (-27, 45, -3), (-30, 45, -3)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 46, -50), (-22, 46, -50), (-22, 45, -50), (-32, 45, -50), (-32, 46, -24), (-22, 46, -24), (-22, 45, -24), (-32, 45, -24)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-46, 46, -50), (-32, 46, -50), (-32, 45, -50), (-46, 45, -50), (-46, 46, -24), (-32, 46, -24), (-32, 45, -24), (-46, 45, -24)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-27, 46, -24), (-12, 46, -24), (-12, 45, -24), (-27, 45, -24), (-27, 46, -3), (-12, 46, -3), (-12, 45, -3), (-27, 45, -3)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, 47, -3), (-12, 47, -3), (-12, 45, -3), (-30, 45, -3), (-30, 47, 44), (-12, 47, 44), (-12, 45, 44), (-30, 45, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, 45, 18), (-12, 45, 18), (-12, 43, 18), (-30, 43, 18), (-30, 45, 44), (-12, 45, 44), (-12, 43, 44), (-30, 43, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 47, -2), (5, 47, -2), (5, 43, -2), (-5, 43, -2), (-5, 47, 44), (5, 47, 44), (5, 43, 44), (-5, 43, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 47, -2), (-5, 47, -2), (-5, 45, -2), (-12, 45, -2), (-12, 47, 44), (-5, 47, 44), (-5, 45, 44), (-12, 45, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 45, 18), (-5, 45, 18), (-5, 43, 18), (-12, 43, 18), (-12, 45, 44), (-5, 45, 44), (-5, 43, 44), (-12, 43, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, 46, -50), (-12, 46, -50), (-12, 45, -50), (-22, 45, -50), (-22, 46, -24), (-12, 46, -24), (-12, 45, -24), (-22, 45, -24)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, 43, 18), (-12, 43, 18), (-12, 20, 18), (-22, 20, 18), (-22, 43, 34), (-12, 43, 34), (-12, 20, 34), (-22, 20, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 43, 18), (-5, 43, 18), (-5, 20, 18), (-12, 20, 18), (-12, 43, 34), (-5, 43, 34), (-5, 20, 34), (-12, 20, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, 20, 18), (-18, 20, 18), (-18, -3, 18), (-22, -3, 18), (-22, 20, 19), (-18, 20, 19), (-18, -3, 19), (-22, -3, 19)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, 20, 18), (-12, 20, 18), (-12, 15, 18), (-18, 15, 18), (-18, 20, 19), (-12, 20, 19), (-12, 15, 19), (-18, 15, 19)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 20, 18), (-5, 20, 18), (-5, 15, 18), (-12, 15, 18), (-12, 20, 19), (-5, 20, 19), (-5, 15, 19), (-12, 15, 19)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 50, -50), (-5, 50, -50), (-5, 45, -50), (-12, 45, -50), (-12, 50, -2), (-5, 50, -2), (-5, 45, -2), (-12, 45, -2)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, 15, 18), (-16, 15, 18), (-16, -3, 18), (-18, -3, 18), (-18, 15, 46), (-16, 15, 46), (-16, -3, 46), (-18, -3, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, 15, 18), (-5, 15, 18), (-5, 10, 18), (-16, 10, 18), (-16, 15, 46), (-5, 15, 46), (-5, 10, 46), (-16, 10, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, 10, 18), (-5, 10, 18), (-5, -3, 18), (-16, -3, 18), (-16, 10, 46), (-5, 10, 46), (-5, -3, 46), (-16, -3, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-39, 46, -24), (-32, 46, -24), (-32, 45, -24), (-39, 45, -24), (-39, 46, -3), (-32, 46, -3), (-32, 45, -3), (-39, 45, -3)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 46, -24), (-30, 46, -24), (-30, 45, -24), (-32, 45, -24), (-32, 46, -3), (-30, 46, -3), (-30, 45, -3), (-32, 45, -3)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-39, 47, -3), (-32, 47, -3), (-32, 45, -3), (-39, 45, -3), (-39, 47, 44), (-32, 47, 44), (-32, 45, 44), (-39, 45, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-39, 45, 18), (-32, 45, 18), (-32, -3, 18), (-39, -3, 18), (-39, 45, 44), (-32, 45, 44), (-32, -3, 44), (-39, -3, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 11, 18), (-30, 11, 18), (-30, -3, 18), (-32, -3, 18), (-32, 11, 44), (-30, 11, 44), (-30, -3, 44), (-32, -3, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 47, -3), (-30, 47, -3), (-30, 45, -3), (-32, 45, -3), (-32, 47, 44), (-30, 47, 44), (-30, 45, 44), (-32, 45, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 45, 18), (-30, 45, 18), (-30, 30, 18), (-32, 30, 18), (-32, 45, 44), (-30, 45, 44), (-30, 30, 44), (-32, 30, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 30, 18), (-30, 30, 18), (-30, 11, 18), (-32, 11, 18), (-32, 30, 44), (-30, 30, 44), (-30, 11, 44), (-32, 11, 44)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-23, 43, 18), (-22, 43, 18), (-22, -3, 18), (-23, -3, 18), (-23, 43, 34), (-22, 43, 34), (-22, -3, 34), (-23, -3, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, 11, 18), (-23, 11, 18), (-23, -3, 18), (-30, -3, 18), (-30, 11, 34), (-23, 11, 34), (-23, -3, 34), (-30, -3, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, 43, 18), (-23, 43, 18), (-23, 30, 18), (-30, 30, 18), (-30, 43, 34), (-23, 43, 34), (-23, 30, 34), (-30, 30, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, 30, 18), (-23, 30, 18), (-23, 11, 18), (-30, 11, 18), (-30, 30, 34), (-23, 30, 34), (-23, 11, 34), (-30, 11, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(18, -20, 6), (26, -20, 6), (26, -33, 6), (18, -33, 6), (18, -20, 46), (26, -20, 46), (26, -33, 46), (18, -33, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(18, 10, 6), (26, 10, 6), (26, -8, 6), (18, -8, 6), (18, 10, 46), (26, 10, 46), (26, -8, 46), (18, -8, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(18, -8, 13), (26, -8, 13), (26, -20, 13), (18, -20, 13), (18, -8, 46), (26, -8, 46), (26, -20, 46), (18, -20, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(30, 10, -47), (35, 10, -47), (35, -41, -47), (30, -41, -47), (30, 10, 6), (35, 10, 6), (35, -41, 6), (30, -41, 6)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(18, -20, -47), (30, -20, -47), (30, -41, -47), (18, -41, -47), (18, -20, 6), (30, -20, 6), (30, -41, 6), (18, -41, 6)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(18, 10, -47), (30, 10, -47), (30, -8, -47), (18, -8, -47), (18, 10, 6), (30, 10, 6), (30, -8, 6), (18, -8, 6)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(18, -8, -47), (30, -8, -47), (30, -20, -47), (18, -20, -47), (18, -8, -3), (30, -8, -3), (30, -20, -3), (18, -20, -3)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-46, -3, -50), (-41, -3, -50), (-41, -6, -50), (-46, -6, -50), (-46, -3, -1), (-41, -3, -1), (-41, -6, -1), (-46, -6, -1)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, -3, -50), (-39, -3, -50), (-39, -6, -50), (-41, -6, -50), (-41, -3, -33), (-39, -3, -33), (-39, -6, -33), (-41, -6, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-39, -3, -50), (-30, -3, -50), (-30, -6, -50), (-39, -6, -50), (-39, -3, -33), (-30, -3, -33), (-30, -6, -33), (-39, -6, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, -3, -50), (-27, -3, -50), (-27, -6, -50), (-30, -6, -50), (-30, -3, -33), (-27, -3, -33), (-27, -6, -33), (-30, -6, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-27, -3, -50), (-22, -3, -50), (-22, -6, -50), (-27, -6, -50), (-27, -3, -33), (-22, -3, -33), (-22, -6, -33), (-27, -6, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-27, -7, -21), (-22, -7, -21), (-22, -8, -21), (-27, -8, -21), (-27, -7, -13), (-22, -7, -13), (-22, -8, -13), (-27, -8, -13)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -3, -50), (-16, -3, -50), (-16, -6, -50), (-22, -6, -50), (-22, -3, -33), (-16, -3, -33), (-16, -6, -33), (-22, -6, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -7, -38), (-16, -7, -38), (-16, -27, -38), (-22, -27, -38), (-22, -7, -29), (-16, -7, -29), (-16, -27, -29), (-22, -27, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -6, -38), (-16, -6, -38), (-16, -7, -38), (-22, -7, -38), (-22, -6, -33), (-16, -6, -33), (-16, -7, -33), (-22, -7, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, 20, -50), (-16, 20, -50), (-16, -3, -50), (-22, -3, -50), (-22, 20, -33), (-16, 20, -33), (-16, -3, -33), (-22, -3, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, 20, -50), (-12, 20, -50), (-12, 10, -50), (-16, 10, -50), (-16, 20, -33), (-12, 20, -33), (-12, 10, -33), (-16, 10, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 45, -50), (-22, 45, -50), (-22, 43, -50), (-32, 43, -50), (-32, 45, -29), (-22, 45, -29), (-22, 43, -29), (-32, 43, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-32, 43, -50), (-22, 43, -50), (-22, -3, -50), (-32, -3, -50), (-32, 43, -33), (-22, 43, -33), (-22, -3, -33), (-32, -3, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-46, 26, -50), (-41, 26, -50), (-41, -3, -50), (-46, -3, -50), (-46, 26, -29), (-41, 26, -29), (-41, -3, -29), (-46, -3, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, 26, -50), (-32, 26, -50), (-32, -3, -50), (-41, -3, -50), (-41, 26, -33), (-32, 26, -33), (-32, -3, -33), (-41, -3, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-46, 45, -50), (-41, 45, -50), (-41, 41, -50), (-46, 41, -50), (-46, 45, -29), (-41, 45, -29), (-41, 41, -29), (-46, 41, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, 45, -50), (-32, 45, -50), (-32, 43, -50), (-41, 43, -50), (-41, 45, -29), (-32, 45, -29), (-32, 43, -29), (-41, 43, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, 43, -50), (-32, 43, -50), (-32, 41, -50), (-41, 41, -50), (-41, 43, -33), (-32, 43, -33), (-32, 41, -33), (-41, 41, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-46, 41, -37), (-41, 41, -37), (-41, 26, -37), (-46, 26, -37), (-46, 41, -29), (-41, 41, -29), (-41, 26, -29), (-46, 26, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, 41, -37), (-32, 41, -37), (-32, 26, -37), (-41, 26, -37), (-41, 41, -33), (-32, 41, -33), (-32, 26, -33), (-41, 26, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, 45, -50), (-12, 45, -50), (-12, 43, -50), (-22, 43, -50), (-22, 45, -29), (-12, 45, -29), (-12, 43, -29), (-22, 43, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, 43, -50), (-12, 43, -50), (-12, 20, -50), (-22, 20, -50), (-22, 43, -33), (-12, 43, -33), (-12, 20, -33), (-22, 20, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(9, 43, -2), (21, 43, -2), (21, 20, -2), (9, 20, -2), (9, 43, 34), (21, 43, 34), (21, 20, 34), (9, 20, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 43, 15), (9, 43, 15), (9, 20, 15), (-5, 20, 15), (-5, 43, 34), (9, 43, 34), (9, 20, 34), (-5, 20, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -7, -29), (-18, -7, -29), (-18, -27, -29), (-22, -27, -29), (-22, -7, 19), (-18, -7, 19), (-18, -27, 19), (-22, -27, 19)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-22, -3, 15), (-18, -3, 15), (-18, -7, 15), (-22, -7, 15), (-22, -3, 19), (-18, -3, 19), (-18, -7, 19), (-22, -7, 19)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(9, 20, -2), (26, 20, -2), (26, 15, -2), (9, 15, -2), (9, 20, 19), (26, 20, 19), (26, 15, 19), (9, 15, 19)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 20, 15), (9, 20, 15), (9, 15, 15), (-5, 15, 15), (-5, 20, 19), (9, 20, 19), (9, 15, 19), (-5, 15, 19)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(9, 50, -50), (26, 50, -50), (26, 15, -50), (9, 15, -50), (9, 50, -2), (26, 50, -2), (26, 15, -2), (9, 15, -2)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 50, -50), (9, 50, -50), (9, 43, -50), (-5, 43, -50), (-5, 50, -2), (9, 50, -2), (9, 43, -2), (-5, 43, -2)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 43, -50), (9, 43, -50), (9, 15, -50), (-5, 15, -50), (-5, 43, -33), (9, 43, -33), (9, 15, -33), (-5, 15, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 45, -50), (-5, 45, -50), (-5, 43, -50), (-12, 43, -50), (-12, 45, -29), (-5, 45, -29), (-5, 43, -29), (-12, 43, -29)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 43, -50), (-5, 43, -50), (-5, 15, -50), (-12, 15, -50), (-12, 43, -33), (-5, 43, -33), (-5, 15, -33), (-12, 15, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, -7, -29), (-16, -7, -29), (-16, -27, -29), (-18, -27, -29), (-18, -7, -7), (-16, -7, -7), (-16, -27, -7), (-18, -27, -7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(9, 15, -50), (26, 15, -50), (26, 10, -50), (9, 10, -50), (9, 15, -7), (26, 15, -7), (26, 10, -7), (9, 10, -7)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 15, -50), (9, 15, -50), (9, 10, -50), (-5, 10, -50), (-5, 15, -33), (9, 15, -33), (9, 10, -33), (-5, 10, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-12, 15, -50), (-5, 15, -50), (-5, 10, -50), (-12, 10, -50), (-12, 15, -33), (-5, 15, -33), (-5, 10, -33), (-12, 10, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, -7, -7), (-16, -7, -7), (-16, -33, -7), (-18, -33, -7), (-18, -7, 46), (-16, -7, 46), (-16, -33, 46), (-18, -33, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-18, -3, 15), (-16, -3, 15), (-16, -7, 15), (-18, -7, 15), (-18, -3, 46), (-16, -3, 46), (-16, -7, 46), (-18, -7, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(9, 15, -7), (26, 15, -7), (26, 10, -7), (9, 10, -7), (9, 15, 46), (26, 15, 46), (26, 10, 46), (9, 10, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 15, 15), (9, 15, 15), (9, 10, 15), (-5, 10, 15), (-5, 15, 46), (9, 15, 46), (9, 10, 46), (-5, 10, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, -7, 6), (-5, -7, 6), (-5, -33, 6), (-16, -33, 6), (-16, -7, 46), (-5, -7, 46), (-5, -33, 46), (-16, -33, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, -3, 15), (-5, -3, 15), (-5, -7, 15), (-16, -7, 15), (-16, -3, 46), (-5, -3, 46), (-5, -7, 46), (-16, -7, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, -7, -47), (-5, -7, -47), (-5, -41, -47), (-16, -41, -47), (-16, -7, 6), (-5, -7, 6), (-5, -41, 6), (-16, -41, 6)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, -3, -47), (-5, -3, -47), (-5, -7, -47), (-16, -7, -47), (-16, -3, -33), (-5, -3, -33), (-5, -7, -33), (-16, -7, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-16, 10, -47), (-5, 10, -47), (-5, -3, -47), (-16, -3, -47), (-16, 10, -33), (-5, 10, -33), (-5, -3, -33), (-16, -3, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-23, -7, -13), (-22, -7, -13), (-22, -8, -13), (-23, -8, -13), (-23, -7, 34), (-22, -7, 34), (-22, -8, 34), (-23, -8, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-23, -3, 15), (-22, -3, 15), (-22, -7, 15), (-23, -7, 15), (-23, -3, 34), (-22, -3, 34), (-22, -7, 34), (-23, -7, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, -7, -13), (-23, -7, -13), (-23, -8, -13), (-30, -8, -13), (-30, -7, 34), (-23, -7, 34), (-23, -8, 34), (-30, -8, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-30, -3, 15), (-23, -3, 15), (-23, -7, 15), (-30, -7, 15), (-30, -3, 34), (-23, -3, 34), (-23, -7, 34), (-30, -7, 34)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-49, 45, -29), (-41, 45, -29), (-41, -3, -29), (-49, -3, -29), (-49, 45, 18), (-41, 45, 18), (-41, -3, 18), (-49, -3, 18)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, 45, -29), (-5, 45, -29), (-5, 43, -29), (-41, 43, -29), (-41, 45, 18), (-5, 45, 18), (-5, 43, 18), (-41, 43, 18)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, 43, 15), (-5, 43, 15), (-5, -3, 15), (-41, -3, 15), (-41, 43, 18), (-5, 43, 18), (-5, -3, 18), (-41, -3, 18)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(9, 10, 6), (18, 10, 6), (18, -33, 6), (9, -33, 6), (9, 10, 46), (18, 10, 46), (18, -33, 46), (9, -33, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, -7, 6), (9, -7, 6), (9, -33, 6), (-5, -33, 6), (-5, -7, 46), (9, -7, 46), (9, -33, 46), (-5, -33, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 10, 15), (9, 10, 15), (9, -7, 15), (-5, -7, 15), (-5, 10, 46), (9, 10, 46), (9, -7, 46), (-5, -7, 46)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(9, 10, -47), (18, 10, -47), (18, -41, -47), (9, -41, -47), (9, 10, 6), (18, 10, 6), (18, -41, 6), (9, -41, 6)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, -7, -47), (9, -7, -47), (9, -41, -47), (-5, -41, -47), (-5, -7, 6), (9, -7, 6), (9, -41, 6), (-5, -41, 6)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-5, 10, -47), (9, 10, -47), (9, -7, -47), (-5, -7, -47), (-5, 10, -33), (9, 10, -33), (9, -7, -33), (-5, -7, -33)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+
+verts = [(-41, 43, -33), (9, 43, -33), (9, -7, -33), (-41, -7, -33), (-41, 43, 15), (9, 43, 15), (9, -7, 15), (-41, -7, 15)]
+faces = [(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)]
+
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata(verts,[],faces)
+cubeMesh.update(calc_edges=True)
+
+	
+
+sum = 562104
+Day 22: Part 2: = <nil>

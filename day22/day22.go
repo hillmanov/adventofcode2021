@@ -10,6 +10,7 @@ import (
 var f embed.FS
 
 type Cuboid struct {
+	Side  string
 	State string
 	MinX  int
 	MaxX  int
@@ -23,6 +24,40 @@ type Voxel struct {
 	X int
 	Y int
 	Z int
+}
+
+func (c Cuboid) Blender() {
+	/*
+	   collection = bpy.data.collections.new("State")
+	   cubeMesh = bpy.data.meshes.new("cube")
+	   cubeObj = bpy.data.objects.new("cube", cubeMesh)
+	   cubeObj.location = bpy.context.scene.cursor.location
+	   collection.objects.link(cubeObj)
+	   cubeMesh.from_pydata([(-20, 23, -26), (33, 23, -26), (33, -21, -26), (-20, -21, -26), (-20, 23, 28), (33, 23, 28), (33, -21, 28), (-20, -21, 28)],[],[(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)])
+	   cubeMesh.update(calc_edges=True)
+
+	   bpy.context.scene.collection.children.link(collection)
+	*/
+
+	fmt.Printf(`
+cubeMesh = bpy.data.meshes.new("cube")
+cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeObj.location = bpy.context.scene.cursor.location
+bpy.context.scene.collection.objects.link(cubeObj)
+cubeMesh.from_pydata([(%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d)],[],[(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)])
+cubeMesh.update(calc_edges=True)
+	`,
+		c.MinX, c.MaxY, c.MinZ,
+		c.MaxX, c.MaxY, c.MinZ,
+		c.MaxX, c.MinY, c.MinZ,
+		c.MinX, c.MinY, c.MinZ,
+
+		c.MinX, c.MaxY, c.MaxZ,
+		c.MaxX, c.MaxY, c.MaxZ,
+		c.MaxX, c.MinY, c.MaxZ,
+		c.MinX, c.MinY, c.MaxZ,
+	)
+
 }
 
 func (c Cuboid) Volume() int {
@@ -40,24 +75,12 @@ func (A Cuboid) Contains(B Cuboid) bool {
 }
 
 func (A Cuboid) Intersects(B Cuboid) bool {
-	return (MinInt(B.MaxX, A.MaxX)-MaxInt(B.MinX, A.MinX) > 0) &&
-		(MinInt(B.MaxY, A.MaxY)-MaxInt(B.MinY, A.MinY) > 0) &&
-		(MinInt(B.MaxZ, A.MaxZ)-MaxInt(B.MinZ, A.MinZ) > 0)
-}
-
-func (A Cuboid) Intersection(B Cuboid) Cuboid {
-	if A.Intersects(B) {
-		return Cuboid{
-			MinX: MaxInt(B.MinX, A.MinX),
-			MaxX: MinInt(B.MaxX, A.MaxX),
-			MinY: MaxInt(B.MinY, A.MinY),
-			MaxY: MinInt(B.MinY, A.MinY),
-			MinZ: MaxInt(B.MinZ, A.MinZ),
-			MaxZ: MinInt(B.MinZ, A.MinZ),
-		}
-	}
-
-	return Cuboid{}
+	return (A.MaxX > B.MinX) &&
+		(A.MinX < B.MaxX) &&
+		(A.MaxY > B.MinY) &&
+		(A.MinY < B.MaxY) &&
+		(A.MaxZ > B.MinZ) &&
+		(A.MinZ < B.MaxZ)
 }
 
 func (A Cuboid) Split(B Cuboid) []Cuboid {
@@ -66,6 +89,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 	// X
 	if A.MinX < B.MinX {
 		splits = append(splits, Cuboid{
+			Side:  "Left",
 			State: "on",
 			MinX:  A.MinX,
 			MaxX:  B.MinX,
@@ -78,10 +102,11 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 
 	if A.MaxX > B.MaxX {
 		splits = append(splits, Cuboid{
+			Side:  "Right",
 			State: "on",
 			MinX:  B.MaxX,
 			MaxX:  A.MaxX,
-			MinY:  B.MaxY,
+			MinY:  A.MinY,
 			MaxY:  A.MaxY,
 			MinZ:  A.MinZ,
 			MaxZ:  A.MaxZ,
@@ -91,6 +116,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 	// Y
 	if A.MinY < B.MinY {
 		splits = append(splits, Cuboid{
+			Side:  "Face",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
 			MaxX:  MinInt(A.MaxX, B.MaxX),
@@ -103,6 +129,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 
 	if A.MaxY > B.MaxY {
 		splits = append(splits, Cuboid{
+			Side:  "Back",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
 			MaxX:  MinInt(A.MaxX, B.MaxX),
@@ -116,6 +143,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 	// Z
 	if A.MinZ < B.MinZ {
 		splits = append(splits, Cuboid{
+			Side:  "Bottom",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
 			MaxX:  MinInt(A.MaxX, B.MaxX),
@@ -128,6 +156,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 
 	if A.MaxZ > B.MaxZ {
 		splits = append(splits, Cuboid{
+			Side:  "Top",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
 			MaxX:  MinInt(A.MaxX, B.MaxX),
@@ -183,63 +212,54 @@ func Part1() Any {
 }
 
 func Part2() Any {
-	a := Cuboid{
-		State: "off",
-		MinX:  -3,
-		MaxX:  3,
-		MinY:  -3,
-		MaxY:  3,
-		MinZ:  -3,
-		MaxZ:  3,
-	}
 
-	b := Cuboid{
-		State: "on",
-		MinX:  -4,
-		MaxX:  4,
-		MinY:  -4,
-		MaxY:  4,
-		MinZ:  -4,
-		MaxZ:  4,
-	}
+	newCuboids := getInput()
 
-	// fmt.Printf("a.Intersects(b) = %+v, %v\n", a.Intersects(b), a.Intersection(b))
-	// fmt.Printf("a.Intersects(b) = %+v %v\n", b.Intersects(a), b.Intersection(a))
+	// newCuboids := []Cuboid{
+	// 	{State: "on",
+	// 		MinX: -4,
+	// 		MaxX: 4,
+	// 		MinY: -4,
+	// 		MaxY: 4,
+	// 		MinZ: -4,
+	// 		MaxZ: 4,
+	// 	}, {
+	// 		State: "off",
+	// 		MinX:  -6,
+	// 		MaxX:  6,
+	// 		MinY:  -3,
+	// 		MaxY:  3,
+	// 		MinZ:  -3,
+	// 		MaxZ:  3,
+	// 	},
+	// }
 
-	// fmt.Printf("b.Split(a) = %+v\n", b.Split(a))
-
-	// newCuboids := getInput()
 	cuboids := []Cuboid{}
 
-	newCuboids := []Cuboid{b, a}
-
-	for nI, newCuboid := range newCuboids {
-		if len(cuboids) == 0 && newCuboid.State == "on" {
-			cuboids = append(cuboids, newCuboid)
-			continue
-		}
-
-		for cI, cuboid := range cuboids {
-			if newCuboid.Intersects(cuboid) {
+	for nI := 0; nI < len(newCuboids); nI++ {
+		for cI := 0; cI < len(cuboids); cI++ {
+			if newCuboids[nI].Intersects(cuboids[cI]) {
 
 				switch {
-				case newCuboid.State == "on" && cuboid.State == "on":
-					if newCuboid.Contains(cuboid) {
+				case newCuboids[nI].State == "on":
+
+					if newCuboids[nI].Contains(cuboids[cI]) {
 						cuboids[cI].State = "remove"
-					} else if cuboid.Contains(newCuboid) {
+					} else if cuboids[cI].Contains(newCuboids[nI]) {
 						newCuboids[nI].State = "remove"
 					} else {
 						cuboids[cI].State = "remove"
-						cuboids = append(cuboids, cuboid.Split(newCuboid)...)
+						cuboids = append(cuboids, cuboids[cI].Split(newCuboids[nI])...)
 					}
-				case newCuboid.State == "off" && cuboid.State == "on": // Only "on" cuboids are added to the list, but I check here just to help me keep things straight
+
+				case newCuboids[nI].State == "off": // Only "on" cuboids are added to the list, but I check here just to help me keep things straight
 					cuboids[cI].State = "remove"
-					cuboids = append(cuboids, cuboid.Split(newCuboid)...)
+					cuboids = append(cuboids, cuboids[cI].Split(newCuboids[nI])...)
 				}
 			}
 		}
 
-		if newCuboid.State == "on" {
+		if newCuboids[nI].State == "on" {
 			cuboids = append(cuboids, newCuboids[nI])
 		}
 
@@ -254,7 +274,10 @@ func Part2() Any {
 		cuboids = refresh
 	}
 
-	fmt.Printf("cuboids = %+v\n", cuboids)
+	for _, c := range cuboids {
+		c.Blender()
+		fmt.Println("")
+	}
 
 	sum := 0
 	for _, c := range cuboids {
@@ -281,9 +304,9 @@ func getInput() []Cuboid {
 }
 
 func main() {
-	// part1Solution := Part1()
+	part1Solution := Part1()
 	part2Solution := Part2()
 
-	// fmt.Printf("Day 22: Part 1: = %+v\n", part1Solution)
+	fmt.Printf("Day 22: Part 1: = %+v\n", part1Solution)
 	fmt.Printf("Day 22: Part 2: = %+v\n", part2Solution)
 }
