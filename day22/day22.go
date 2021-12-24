@@ -88,9 +88,9 @@ func (c Cuboid) IsNil() bool {
 }
 
 func (A Cuboid) Contains(B Cuboid) bool {
-	return A.MinX <= B.MinX && A.MaxX >= B.MaxY &&
+	return A.MinX <= B.MinX && A.MaxX >= B.MaxX &&
 		A.MinY <= B.MinY && A.MaxY >= B.MaxY &&
-		A.MinZ <= B.MinZ && A.MaxZ >= B.MaxY
+		A.MinZ <= B.MinZ && A.MaxZ >= B.MaxZ
 }
 
 func (A Cuboid) Intersects(B Cuboid) bool {
@@ -237,27 +237,8 @@ func Part1() Any {
 }
 
 func Part2() Any {
-
 	newCuboids := getInput()
-
-	// newCuboids := []Cuboid{
-	// 	{State: "on",
-	// 		MinX: -4,
-	// 		MaxX: 4,
-	// 		MinY: -4,
-	// 		MaxY: 4,
-	// 		MinZ: -4,
-	// 		MaxZ: 4,
-	// 	}, {
-	// 		State: "off",
-	// 		MinX:  -6,
-	// 		MaxX:  6,
-	// 		MinY:  -3,
-	// 		MaxY:  3,
-	// 		MinZ:  -3,
-	// 		MaxZ:  3,
-	// 	},
-	// }
+	fmt.Println("import bpy")
 
 	cuboids := []Cuboid{}
 
@@ -267,7 +248,6 @@ func Part2() Any {
 
 				switch {
 				case newCuboids[nI].State == "on":
-
 					if newCuboids[nI].Contains(cuboids[cI]) {
 						cuboids[cI].State = "remove"
 					} else if cuboids[cI].Contains(newCuboids[nI]) {
@@ -300,14 +280,12 @@ func Part2() Any {
 		BlenderDump(cuboids, "State")
 	}
 
-	sum := 0
+	countOn := 0
 	for _, c := range cuboids {
-		sum += c.Volume()
+		countOn += c.Volume()
 	}
 
-	fmt.Printf("sum = %+v\n", sum)
-
-	return nil
+	return countOn
 }
 
 func getInput() []Cuboid {
@@ -318,6 +296,9 @@ func getInput() []Cuboid {
 	for i, line := range lines {
 		step := Cuboid{Index: i}
 		fmt.Sscanf(line, "%s x=%d..%d,y=%d..%d,z=%d..%d", &step.State, &step.MinX, &step.MaxX, &step.MinY, &step.MaxY, &step.MinZ, &step.MaxZ)
+		step.MaxX += 1
+		step.MaxY += 1
+		step.MaxZ += 1
 		steps = append(steps, step)
 	}
 
