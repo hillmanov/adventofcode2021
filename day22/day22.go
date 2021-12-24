@@ -10,6 +10,7 @@ import (
 var f embed.FS
 
 type Cuboid struct {
+	Index int
 	Side  string
 	State string
 	MinX  int
@@ -26,27 +27,45 @@ type Voxel struct {
 	Z int
 }
 
-func (c Cuboid) Blender() {
-	/*
-	   collection = bpy.data.collections.new("State")
-	   cubeMesh = bpy.data.meshes.new("cube")
-	   cubeObj = bpy.data.objects.new("cube", cubeMesh)
-	   cubeObj.location = bpy.context.scene.cursor.location
-	   collection.objects.link(cubeObj)
-	   cubeMesh.from_pydata([(-20, 23, -26), (33, 23, -26), (33, -21, -26), (-20, -21, -26), (-20, 23, 28), (33, 23, 28), (33, -21, 28), (-20, -21, 28)],[],[(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)])
-	   cubeMesh.update(calc_edges=True)
+func BlenderDump(cuboids []Cuboid, collection string) {
+	fmt.Println("")
+	fmt.Printf("collection = bpy.data.collections.new(\"%s\")\n", collection)
+	fmt.Println("bpy.context.scene.collection.children.link(collection)")
+	for _, c := range cuboids {
+		c.Blender()
+	}
+}
 
-	   bpy.context.scene.collection.children.link(collection)
-	*/
+func (c Cuboid) Blender() {
+	var x, y, z float64
+	for i := 0; i < c.Index; i++ {
+		x += .05
+		y += .3
+		z += .7
+		if x > 3 {
+			x = 0
+		}
+		if y > 3 {
+			y = 0
+		}
+		if z > 3 {
+			z = 0
+		}
+	}
 
 	fmt.Printf(`
-cubeMesh = bpy.data.meshes.new("cube")
-cubeObj = bpy.data.objects.new("cube", cubeMesh)
+cubeMesh = bpy.data.meshes.new("cube%d")
+color = bpy.data.materials.new("CubeColor")
+color.diffuse_color = ( %.1f, %.1f, %.1f, 0.9 )
+cubeMesh.materials.append(color)
+cubeObj = bpy.data.objects.new("cube%d", cubeMesh)
 cubeObj.location = bpy.context.scene.cursor.location
-bpy.context.scene.collection.objects.link(cubeObj)
+collection.objects.link(cubeObj)
 cubeMesh.from_pydata([(%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d), (%d, %d, %d)],[],[(0,1,2,3), (4,5,6,7), (0,4,5,1), (1,5,6,2), (2,6,7,3), (3,7,4,0)])
 cubeMesh.update(calc_edges=True)
-	`,
+
+	`, c.Index, float64(x), float64(y), float64(z),
+		c.Index,
 		c.MinX, c.MaxY, c.MinZ,
 		c.MaxX, c.MaxY, c.MinZ,
 		c.MaxX, c.MinY, c.MinZ,
@@ -89,6 +108,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 	// X
 	if A.MinX < B.MinX {
 		splits = append(splits, Cuboid{
+			Index: A.Index,
 			Side:  "Left",
 			State: "on",
 			MinX:  A.MinX,
@@ -102,6 +122,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 
 	if A.MaxX > B.MaxX {
 		splits = append(splits, Cuboid{
+			Index: A.Index,
 			Side:  "Right",
 			State: "on",
 			MinX:  B.MaxX,
@@ -116,6 +137,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 	// Y
 	if A.MinY < B.MinY {
 		splits = append(splits, Cuboid{
+			Index: A.Index,
 			Side:  "Face",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
@@ -129,6 +151,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 
 	if A.MaxY > B.MaxY {
 		splits = append(splits, Cuboid{
+			Index: A.Index,
 			Side:  "Back",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
@@ -143,6 +166,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 	// Z
 	if A.MinZ < B.MinZ {
 		splits = append(splits, Cuboid{
+			Index: A.Index,
 			Side:  "Bottom",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
@@ -156,6 +180,7 @@ func (A Cuboid) Split(B Cuboid) []Cuboid {
 
 	if A.MaxZ > B.MaxZ {
 		splits = append(splits, Cuboid{
+			Index: A.Index,
 			Side:  "Top",
 			State: "on",
 			MinX:  MaxInt(A.MinX, B.MinX),
@@ -272,11 +297,7 @@ func Part2() Any {
 			refresh = append(refresh, cuboid)
 		}
 		cuboids = refresh
-	}
-
-	for _, c := range cuboids {
-		c.Blender()
-		fmt.Println("")
+		BlenderDump(cuboids, "State")
 	}
 
 	sum := 0
@@ -294,8 +315,8 @@ func getInput() []Cuboid {
 
 	steps := []Cuboid{}
 
-	for _, line := range lines {
-		step := Cuboid{}
+	for i, line := range lines {
+		step := Cuboid{Index: i}
 		fmt.Sscanf(line, "%s x=%d..%d,y=%d..%d,z=%d..%d", &step.State, &step.MinX, &step.MaxX, &step.MinY, &step.MaxY, &step.MinZ, &step.MaxZ)
 		steps = append(steps, step)
 	}
