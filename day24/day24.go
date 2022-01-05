@@ -14,21 +14,21 @@ var f embed.FS
 func Part1() Any {
 	program := getInput()
 
-	r := process([]int{10}, program)
-	fmt.Printf("r = %+v\n", r)
+	// r := process([]int{10}, program)
+	// fmt.Printf("r = %+v\n", r)
 
-	// for i := 99999999999999; i > 11111111111111; i-- {
-	// 	if containsZero(i) {
-	// 		continue
-	// 	}
-	// 	input := intToSlice(i, nil)
-	// 	r := process(input, program)
-	// 	fmt.Printf("r = %+v\n", r)
-	// 	if r["z"] == 0 {
-	// 		fmt.Println("DONE", i)
-	// 		return i
-	// 	}
-	// }
+	for i := 12345678987654; i < 99999999999999; i++ {
+		if containsZero(i) {
+			continue
+		}
+		input := intToSlice(i, nil)
+		// fmt.Printf("input = %+v\n", input)
+		r := process(input, program)
+		if r["z"] == 0 {
+			fmt.Println("DONE", i)
+			break
+		}
+	}
 	return -1
 }
 
@@ -38,8 +38,8 @@ func Part2() Any {
 
 func process(input []int, program []string) map[string]int {
 
-	fmt.Printf("input = %+v\n", input)
-	fmt.Printf("len(input) = %+v\n", len(input))
+	// fmt.Printf("input = %+v\n", input)
+	// fmt.Printf("len(input) = %+v\n", len(input))
 
 	vars := make(map[string]int)
 
@@ -49,40 +49,59 @@ func process(input []int, program []string) map[string]int {
 		instruction := string(parts[0])
 		variable := string(parts[1])
 
+		// fmt.Printf("%+v -> ", line)
+
 		switch instruction {
 		case "inp":
 			vars[variable] = input[0]
+			// fmt.Printf("vars[%s] <- %d\n", variable, input[0])
 			input = input[1:]
 		case "add":
 			arg := string(parts[2])
 			switch kind, val := varOrInt(arg); {
 			case kind == "string":
+				// fmt.Printf("%s = %s + %s => ", variable, variable, val.(string))
+				// fmt.Printf("%s = %d + %d (%d)", variable, vars[variable], vars[val.(string)], vars[variable]+vars[val.(string)])
 				vars[variable] = vars[variable] + vars[val.(string)]
 			case kind == "int":
+				// fmt.Printf("%s = %s + %d => ", variable, variable, val.(int))
+				// fmt.Printf("%s = %d + %d (%d)", variable, vars[variable], val.(int), vars[variable]+val.(int))
 				vars[variable] = vars[variable] + val.(int)
 			}
 		case "mul":
 			arg := string(parts[2])
 			switch kind, val := varOrInt(arg); {
 			case kind == "string":
+				// fmt.Printf("%s = %s * %s => ", variable, variable, val.(string))
+				// fmt.Printf("%s = %d * %d (%d)", variable, vars[variable], vars[val.(string)], vars[variable]*vars[val.(string)])
 				vars[variable] = vars[variable] * vars[val.(string)]
 			case kind == "int":
+				// fmt.Printf("%s = %s * %d => ", variable, variable, val.(int))
+				// fmt.Printf("%s = %d * %d (%d)", variable, vars[variable], val.(int), vars[variable]*val.(int))
 				vars[variable] = vars[variable] * val.(int)
 			}
 		case "div":
 			arg := string(parts[2])
 			switch kind, val := varOrInt(arg); {
 			case kind == "string":
+				// fmt.Printf("%s = %s / %s => ", variable, variable, val.(string))
+				// fmt.Printf("%s = %d / %d (%d)", variable, vars[variable], vars[val.(string)], vars[variable]/vars[val.(string)])
 				vars[variable] = vars[variable] / vars[val.(string)]
 			case kind == "int":
+				// fmt.Printf("%s = %s / %d => ", variable, variable, val.(int))
+				// fmt.Printf("%s = %d / %d (%d)", variable, vars[variable], val.(int), vars[variable]/val.(int))
 				vars[variable] = vars[variable] / val.(int)
 			}
 		case "mod":
 			arg := string(parts[2])
 			switch kind, val := varOrInt(arg); {
 			case kind == "string":
+				// fmt.Printf("%s = %s %% %s => ", variable, variable, val.(string))
+				// fmt.Printf("%s = %d %% %d (%d)", variable, vars[variable], vars[val.(string)], vars[variable]%vars[val.(string)])
 				vars[variable] = vars[variable] % vars[val.(string)]
 			case kind == "int":
+				// fmt.Printf("%s = %s %% %d => ", variable, variable, val.(int))
+				// fmt.Printf("%s = %d %% %d (%d)", variable, vars[variable], val.(int), vars[variable]%val.(int))
 				vars[variable] = vars[variable] % val.(int)
 			}
 		case "eql":
@@ -90,6 +109,12 @@ func process(input []int, program []string) map[string]int {
 			switch kind, val := varOrInt(arg); {
 			case kind == "string":
 				if vars[variable] == vars[val.(string)] {
+					vars[variable] = 1
+				} else {
+					vars[variable] = 0
+				}
+			case kind == "int":
+				if vars[variable] == val.(int) {
 					vars[variable] = 1
 				} else {
 					vars[variable] = 0
