@@ -5,7 +5,6 @@ import (
 	"embed"
 	"fmt"
 	"math"
-	"sort"
 	"strings"
 )
 
@@ -13,11 +12,12 @@ import (
 var f embed.FS
 
 type Scanner struct {
-	Label   int
-	X       int
-	Y       int
-	Z       int
-	Beacons []Beacon
+	Label    int
+	Rotation int
+	X        int
+	Y        int
+	Z        int
+	Beacons  []Beacon
 }
 
 type Beacon struct {
@@ -28,7 +28,8 @@ type Beacon struct {
 	Orientations []Beacon
 }
 
-type VectorPair struct {
+type Vector struct {
+	Value   float64
 	BeaconA Beacon
 	BeaconB Beacon
 }
@@ -86,48 +87,34 @@ func (b *Beacon) getOrientations() []Beacon {
 	return b.Orientations
 }
 
-func (s Scanner) Vectors() map[float64]VectorPair {
-	vectors := map[float64]VectorPair{}
+func (s Scanner) Vectors() []Vector {
+	vectors := []Vector{}
 
 	for i := 0; i < len(s.Beacons)-1; i++ {
-		for j := i + 1; j < len(s.Beacons)-1; j++ {
+		for j := 0; j < len(s.Beacons)-1; j++ {
 			if i == j {
 				continue
 			}
-			vectors[math.Sqrt(
-				math.Pow(float64(s.Beacons[i].X)-float64(s.Beacons[j].X), 2)+
-					math.Pow(float64(s.Beacons[i].Y)-float64(s.Beacons[j].Y), 2)+
-					math.Pow(float64(s.Beacons[i].Z)-float64(s.Beacons[j].Z), 2),
-			)] = VectorPair{
+			vectors = append(vectors, Vector{
+				Value: math.Sqrt(
+					math.Pow(float64(s.Beacons[i].X)-float64(s.Beacons[j].X), 2) +
+						math.Pow(float64(s.Beacons[i].Y)-float64(s.Beacons[j].Y), 2) +
+						math.Pow(float64(s.Beacons[i].Z)-float64(s.Beacons[j].Z), 2),
+				),
 				BeaconA: s.Beacons[i],
 				BeaconB: s.Beacons[j],
-			}
+			})
 		}
 	}
-	return vectors
 
-}
-
-func CalculateVectors(beacons []Beacon) []float64 {
-	vectors := []float64{}
-	origin := beacons[0]
-	for _, b := range beacons[1:] {
-		vector := math.Sqrt(
-			math.Pow(float64(b.X)-float64(origin.X), 2) +
-				math.Pow(float64(b.Y)-float64(origin.Y), 2) +
-				math.Pow(float64(b.Z)-float64(origin.Z), 2),
-		)
-		vectors = append(vectors, vector)
-	}
-	sort.Float64s(vectors)
 	return vectors
 }
 
 func Part1() Any {
-	scanners := getInput()
-	s := scanners[0]
+	// scanners := getInput()
+	// s := scanners[0]
 
-	fmt.Printf("s.Vectors() = %+v\n", s.Vectors())
+	// fmt.Printf("s.Vectors() = %+v\n", s.Vectors())
 
 	return nil
 }
@@ -149,7 +136,8 @@ func getInput() []Scanner {
 
 		case strings.HasPrefix(line, "--- scanner"):
 			currentScanner = Scanner{
-				Beacons: []Beacon{},
+				Rotation: -1, // NO rotation has been set yet
+				Beacons:  []Beacon{},
 			}
 			fmt.Sscanf(line, "--- scanner %d ---", &currentScanner.Label)
 
@@ -169,6 +157,25 @@ func getInput() []Scanner {
 	scanners = append(scanners, currentScanner)
 
 	return scanners
+}
+
+func intersection(origin, target []Vector) [][2]Vector {
+	intersecting := [][2]Vector{}
+	for _, v1 := range origin {
+		for _, v2 := range target {
+			if v1.Value == v2.Value {
+				intersecting = append(intersecting, [2]Vector{v1, v2})
+			}
+		}
+	}
+
+	return intersecting
+}
+
+func getOffset(v [][2]Vector) (x, y, z int) {
+	return v[0][0].BeaconA.X - v[0][1].BeaconA.X,
+		v[0][0].BeaconA.Y - v[0][1].BeaconA.Y,
+		v[0][0].BeaconA.Z - v[0][1].BeaconA.Z
 }
 
 func main() {

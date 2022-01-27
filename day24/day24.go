@@ -12,24 +12,25 @@ import (
 var f embed.FS
 
 func Part1() Any {
-	program := getInput()
+	return nil
+	// program := getInput()
 
-	// r := process([]int{10}, program)
-	// fmt.Printf("r = %+v\n", r)
+	// // r := process([]int{10}, program)
+	// // fmt.Printf("r = %+v\n", r)
 
-	for i := 12345678987654; i < 99999999999999; i++ {
-		if containsZero(i) {
-			continue
-		}
-		input := intToSlice(i, nil)
-		// fmt.Printf("input = %+v\n", input)
-		r := process(input, program)
-		if r["z"] == 0 {
-			fmt.Println("DONE", i)
-			break
-		}
-	}
-	return -1
+	// for i := 12345678987654; i < 99999999999999; i++ {
+	// 	if containsZero(i) {
+	// 		continue
+	// 	}
+	// 	input := intToSlice(i, nil)
+	// 	// fmt.Printf("input = %+v\n", input)
+	// 	r := process(input, program)
+	// 	if r["z"] == 0 {
+	// 		fmt.Println("DONE", i)
+	// 		break
+	// 	}
+	// }
+	// return -1
 }
 
 func Part2() Any {
