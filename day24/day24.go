@@ -1,5 +1,26 @@
 package main
 
+/*
+inp w     inp w     inp w     inp w     inp w     inp w      inp w    inp w     inp w     inp w     inp w     inp w      inp w     inp w
+mul x 0   mul x 0   mul x 0   mul x 0   mul x 0   mul x 0    mul x 0  mul x 0   mul x 0   mul x 0   mul x 0   mul x 0    mul x 0   mul x 0
+add x z   add x z   add x z   add x z   add x z   add x z    add x z  add x z   add x z   add x z   add x z   add x z    add x z   add x z
+mod x 26  mod x 26  mod x 26  mod x 26  mod x 26  mod x 26   mod x 26 mod x 26  mod x 26  mod x 26  mod x 26  mod x 26   mod x 26  mod x 26
+div z 1   div z 1   div z 1   div z 1   div z 1   div z 26   div z 1  div z 26  div z 26  div z 1   div z 26  div z 26   div z 26  div z 26
+add x 12  add x 11  add x 13  add x 11  add x 14  add x -10  add x 11 add x -9  add x -3  add x 13  add x -5  add x -10  add x -4  add x -5
+eql x w   eql x w   eql x w   eql x w   eql x w   eql x w    eql x w  eql x w   eql x w   eql x w   eql x w   eql x w    eql x w   eql x w
+eql x 0   eql x 0   eql x 0   eql x 0   eql x 0   eql x 0    eql x 0  eql x 0   eql x 0   eql x 0   eql x 0   eql x 0    eql x 0   eql x 0
+mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0    mul y 0  mul y 0   mul y 0   mul y 0   mul y 0   mul y 0    mul y 0   mul y 0
+add y 25  add y 25  add y 25  add y 25  add y 25  add y 25   add y 25 add y 25  add y 25  add y 25  add y 25  add y 25   add y 25  add y 25
+mul y x   mul y x   mul y x   mul y x   mul y x   mul y x    mul y x  mul y x   mul y x   mul y x   mul y x   mul y x    mul y x   mul y x
+add y 1   add y 1   add y 1   add y 1   add y 1   add y 1    add y 1  add y 1   add y 1   add y 1   add y 1   add y 1    add y 1   add y 1
+mul z y   mul z y   mul z y   mul z y   mul z y   mul z y    mul z y  mul z y   mul z y   mul z y   mul z y   mul z y    mul z y   mul z y
+mul y 0   mul y 0   mul y 0   mul y 0   mul y 0   mul y 0    mul y 0  mul y 0   mul y 0   mul y 0   mul y 0   mul y 0    mul y 0   mul y 0
+add y w   add y w   add y w   add y w   add y w   add y w    add y w  add y w   add y w   add y w   add y w   add y w    add y w   add y w
+add y 4   add y 11  add y 5   add y 11  add y 14  add y 7    add y 11 add y 4   add y 6   add y 5   add y 9   add y 12   add y 14  add y 14
+mul y x   mul y x   mul y x   mul y x   mul y x   mul y x    mul y x  mul y x   mul y x   mul y x   mul y x   mul y x    mul y x   mul y x
+add z y   add z y   add z y   add z y   add z y   add z y    add z y  add z y   add z y   add z y   add z y   add z y    add z y   add z y
+*/
+
 import (
 	. "adventofcode/utils"
 	"embed"
@@ -13,9 +34,6 @@ var f embed.FS
 
 func Part1() Any {
 	program := getInput()
-
-	// r := process([]int{10}, program)
-	// fmt.Printf("r = %+v\n", r)
 
 	for i := 12345678987654; i < 99999999999999; i++ {
 		if containsZero(i) {

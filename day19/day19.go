@@ -104,8 +104,8 @@ func (s Scanner) Vectors() map[float64]VectorPair {
 			}
 		}
 	}
-	return vectors
 
+	return vectors
 }
 
 func CalculateVectors(beacons []Beacon) []float64 {
@@ -124,10 +124,10 @@ func CalculateVectors(beacons []Beacon) []float64 {
 }
 
 func Part1() Any {
-	scanners := getInput()
-	s := scanners[0]
+	// scanners := getInput()
+	// s := scanners[0]
 
-	fmt.Printf("s.Vectors() = %+v\n", s.Vectors())
+	// fmt.Printf("s.Vectors() = %+v\n", s.Vectors())
 
 	return nil
 }
@@ -178,3 +178,12 @@ func main() {
 	fmt.Printf("Day 19: Part 1: = %+v\n", part1Solution)
 	fmt.Printf("Day 19: Part 2: = %+v\n", part2Solution)
 }
+
+// Go through the 24 rotations
+// Go through each scanner.
+// If rotation has NOT been found, need to find it's rotation that matches another scanner that HAS been found.
+// If it founds a match of twelve, need to store which rotation matched up (0-23) (you can now delete all other rotations if you want...)
+// GO through and recalculatue the vectors on the scanne you just found using the translation (any match can give the translation) just on the rotation that was found
+// Find all scanners for the current scanner that match. If there are no matches, then go to the next scanner that has a rotation.
+// Once all scanner have a rotation:
+// Once you do that, you can go through the rotated and tranlated beacons, using the x,y,z values as the unique identifier to find all the unique beacons.

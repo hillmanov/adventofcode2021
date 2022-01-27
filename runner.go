@@ -12,7 +12,6 @@ import (
 	"plugin"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/olekukonko/tablewriter"
@@ -143,35 +142,35 @@ func runDay(day string) ([]RunResult, error) {
 
 	log.Printf("Running %s...", day)
 
-	wg := sync.WaitGroup{}
+	// wg := sync.WaitGroup{}
 
-	wg.Add(1)
+	// wg.Add(1)
 	var part1Result RunResult
-	go func() {
-		part1Result = RunResult{
-			Day:       getDayNum(day),
-			Part:      1,
-			StartTime: time.Now(),
-		}
-		part1Result.Solution = part1()
-		part1Result.EndTime = time.Now()
-		wg.Done()
-	}()
+	// go func() {
+	part1Result = RunResult{
+		Day:       getDayNum(day),
+		Part:      1,
+		StartTime: time.Now(),
+	}
+	part1Result.Solution = part1()
+	part1Result.EndTime = time.Now()
+	// wg.Done()
+	// }()
 
-	wg.Add(1)
+	// wg.Add(1)
 	var part2Result RunResult
-	go func() {
-		part2Result = RunResult{
-			Day:       getDayNum(day),
-			Part:      2,
-			StartTime: time.Now(),
-		}
-		part2Result.Solution = part2()
-		part2Result.EndTime = time.Now()
-		wg.Done()
-	}()
+	// go func() {
+	part2Result = RunResult{
+		Day:       getDayNum(day),
+		Part:      2,
+		StartTime: time.Now(),
+	}
+	part2Result.Solution = part2()
+	part2Result.EndTime = time.Now()
+	// wg.Done()
+	// }()
 
-	wg.Wait()
+	// wg.Wait()
 
 	return []RunResult{part1Result, part2Result}, nil
 }
