@@ -5,6 +5,7 @@ import (
 	"embed"
 	"fmt"
 	"math"
+	"sort"
 	"strings"
 )
 
@@ -12,101 +13,153 @@ import (
 var f embed.FS
 
 type Scanner struct {
-	Label    int
-	Rotation int
-	X        int
-	Y        int
-	Z        int
-	Beacons  []Beacon
+	Label           int
+	X               int
+	Y               int
+	Z               int
+	Beacons         []Beacon
+	BeaconRotations [][]Beacon
+	RotationVectors [][]VectorPair
+	Rotation        int
 }
 
 type Beacon struct {
-	ID           string
-	X            int
-	Y            int
-	Z            int
-	Orientations []Beacon
+	X int
+	Y int
+	Z int
 }
 
-type Vector struct {
-	Value   float64
+type VectorPair struct {
 	BeaconA Beacon
 	BeaconB Beacon
+	Value   float64
 }
 
-func (b *Beacon) getOrientations() []Beacon {
-	if b.Orientations != nil {
-		return b.Orientations
-	}
-	dX := []int{1, -1, 1, 1}
-	dY := []int{1, 1, -1, 1}
-	dZ := []int{1, 1, 1, -1}
-
-	rotations := []func(b Beacon) (int, int, int){
-		func(b Beacon) (x, y, z int) {
-			return b.X, b.Y, b.Z
-		},
-
-		func(b Beacon) (x, y, z int) {
-			return b.X, b.Z, b.Y
-		},
-
-		func(b Beacon) (x, y, z int) {
-			return b.Y, b.X, b.Z
-		},
-
-		func(b Beacon) (x, y, z int) {
-			return b.Y, b.Z, b.X
-		},
-
-		func(b Beacon) (x, y, z int) {
-			return b.Z, b.X, b.Y
-		},
-
-		func(b Beacon) (x, y, z int) {
-			return b.Z, b.Y, b.X
-		},
-	}
-
-	orientations := []Beacon{}
-	for _, r := range rotations {
-		rX, rY, rZ := r(*b)
-
-		for i := range dX {
-			orientations = append(orientations, Beacon{
-				ID: b.ID,
-				X:  rX * dX[i],
-				Y:  rY * dY[i],
-				Z:  rZ * dZ[i],
-			})
+func (s *Scanner) DoRotations() {
+	s.BeaconRotations = [][]Beacon{}
+	for i := 0; i < 24; i++ {
+		s.BeaconRotations[i] = make([]Beacon, len(s.Beacons))
+		for j, b := range s.Beacons {
+			s.BeaconRotations[i][j] = b.Rotate(i)
 		}
 	}
-
-	b.Orientations = orientations
-
-	return b.Orientations
 }
 
-func (s Scanner) Vectors() []Vector {
-	vectors := []Vector{}
+func (s *Scanner) DoVectors() {
+	s.RotationVectors = [][]VectorPair{}
+	for rotation := range s.BeaconRotations {
+		s.RotationVectors[rotation] = []VectorPair{}
+		for i := range s.BeaconRotations[rotation] {
+			for j := range s.BeaconRotations[rotation] {
+				if i == j {
+					continue
+				}
+
+				s.RotationVectors[rotation] = append(s.RotationVectors[rotation],
+					VectorPair{
+						BeaconA: s.BeaconRotations[rotation][i],
+						BeaconB: s.BeaconRotations[rotation][j],
+						Value: math.Sqrt(
+							math.Pow(float64(s.BeaconRotations[rotation][i].X)-float64(s.BeaconRotations[rotation][j].X), 2) +
+								math.Pow(float64(s.BeaconRotations[rotation][i].Y)-float64(s.BeaconRotations[rotation][j].Y), 2) +
+								math.Pow(float64(s.BeaconRotations[rotation][i].Z)-float64(s.BeaconRotations[rotation][j].Z), 2),
+						),
+					},
+				)
+			}
+		}
+	}
+}
+
+func (b Beacon) Rotate(rotation int) Beacon {
+	switch rotation {
+	case 0:
+		return Beacon{X: b.X, Y: b.Y, Z: b.Z}
+	case 1:
+		return Beacon{X: -b.X, Y: b.Y, Z: -b.Z}
+	case 2:
+		return Beacon{X: b.Y, Y: -b.X, Z: b.Z}
+	case 3:
+		return Beacon{X: -b.Y, Y: b.X, Z: b.Z}
+	case 4:
+		return Beacon{X: b.Z, Y: b.Y, Z: -b.X}
+	case 5:
+		return Beacon{X: -b.Z, Y: b.Y, Z: b.X}
+	case 6:
+		return Beacon{X: b.X, Y: -b.Z, Z: b.Y}
+	case 7:
+		return Beacon{X: -b.X, Y: b.Z, Z: b.Y}
+	case 8:
+		return Beacon{X: b.Y, Y: -b.Z, Z: -b.X}
+	case 9:
+		return Beacon{X: -b.Y, Y: -b.Z, Z: b.X}
+	case 10:
+		return Beacon{X: b.Z, Y: b.X, Z: b.Y}
+	case 11:
+		return Beacon{X: -b.Z, Y: -b.X, Z: b.Y}
+	case 12:
+		return Beacon{X: b.X, Y: -b.Y, Z: -b.Z}
+	case 13:
+		return Beacon{X: -b.X, Y: -b.Y, Z: b.Z}
+	case 14:
+		return Beacon{X: b.Y, Y: b.X, Z: -b.Z}
+	case 15:
+		return Beacon{X: -b.Y, Y: -b.X, Z: -b.Z}
+	case 16:
+		return Beacon{X: b.Z, Y: -b.Y, Z: b.X}
+	case 17:
+		return Beacon{X: -b.Z, Y: -b.Y, Z: -b.X}
+	case 18:
+		return Beacon{X: b.X, Y: b.Z, Z: -b.Y}
+	case 19:
+		return Beacon{X: -b.X, Y: -b.Z, Z: -b.Y}
+	case 20:
+		return Beacon{X: b.Y, Y: b.Z, Z: b.X}
+	case 21:
+		return Beacon{X: -b.Y, Y: b.Z, Z: -b.X}
+	case 22:
+		return Beacon{X: b.Z, Y: -b.X, Z: -b.Y}
+	case 23:
+		return Beacon{X: -b.Z, Y: b.X, Z: -b.Y}
+	default:
+		panic("Unsupported rotate value")
+	}
+}
+
+func (s Scanner) Vectors() map[float64]VectorPair {
+	vectors := map[float64]VectorPair{}
 
 	for i := 0; i < len(s.Beacons)-1; i++ {
-		for j := 0; j < len(s.Beacons)-1; j++ {
+		for j := i + 1; j < len(s.Beacons)-1; j++ {
 			if i == j {
 				continue
 			}
-			vectors = append(vectors, Vector{
-				Value: math.Sqrt(
-					math.Pow(float64(s.Beacons[i].X)-float64(s.Beacons[j].X), 2) +
-						math.Pow(float64(s.Beacons[i].Y)-float64(s.Beacons[j].Y), 2) +
-						math.Pow(float64(s.Beacons[i].Z)-float64(s.Beacons[j].Z), 2),
-				),
+			vectors[math.Sqrt(
+				math.Pow(float64(s.Beacons[i].X)-float64(s.Beacons[j].X), 2)+
+					math.Pow(float64(s.Beacons[i].Y)-float64(s.Beacons[j].Y), 2)+
+					math.Pow(float64(s.Beacons[i].Z)-float64(s.Beacons[j].Z), 2),
+			)] = VectorPair{
 				BeaconA: s.Beacons[i],
 				BeaconB: s.Beacons[j],
-			})
+			}
 		}
 	}
 
+	return vectors
+}
+
+func CalculateVectors(beacons []Beacon) []float64 {
+	vectors := []float64{}
+	origin := beacons[0]
+	for _, b := range beacons[1:] {
+		vector := math.Sqrt(
+			math.Pow(float64(b.X)-float64(origin.X), 2) +
+				math.Pow(float64(b.Y)-float64(origin.Y), 2) +
+				math.Pow(float64(b.Z)-float64(origin.Z), 2),
+		)
+		vectors = append(vectors, vector)
+	}
+	sort.Float64s(vectors)
 	return vectors
 }
 
@@ -130,14 +183,13 @@ func getInput() []Scanner {
 
 	var currentScanner Scanner
 	var beacon Beacon
-	beaconID := 0
 	for _, line := range lines {
 		switch {
 
 		case strings.HasPrefix(line, "--- scanner"):
 			currentScanner = Scanner{
-				Rotation: -1, // NO rotation has been set yet
 				Beacons:  []Beacon{},
+				Rotation: -1,
 			}
 			fmt.Sscanf(line, "--- scanner %d ---", &currentScanner.Label)
 
@@ -145,12 +197,9 @@ func getInput() []Scanner {
 			scanners = append(scanners, currentScanner)
 
 		default:
-			beacon = Beacon{
-				ID: fmt.Sprintf("%03d", beaconID),
-			}
+			beacon = Beacon{}
 			fmt.Sscanf(line, "%d,%d,%d", &beacon.X, &beacon.Y, &beacon.Z)
 			currentScanner.Beacons = append(currentScanner.Beacons, beacon)
-			beaconID++
 		}
 	}
 	currentScanner.Beacons = append(currentScanner.Beacons, beacon)
@@ -177,7 +226,6 @@ func getOffset(v [][2]Vector) (x, y, z int) {
 		v[0][0].BeaconA.Y - v[0][1].BeaconA.Y,
 		v[0][0].BeaconA.Z - v[0][1].BeaconA.Z
 }
-
 func main() {
 	part1Solution := Part1()
 	part2Solution := Part2()
@@ -185,3 +233,12 @@ func main() {
 	fmt.Printf("Day 19: Part 1: = %+v\n", part1Solution)
 	fmt.Printf("Day 19: Part 2: = %+v\n", part2Solution)
 }
+
+// Go through the 24 rotations
+// Go through each scanner.
+// If rotation has NOT been found, need to find it's rotation that matches another scanner that HAS been found.
+// If it founds a match of twelve, need to store which rotation matched up (0-23) (you can now delete all other rotations if you want...)
+// GO through and recalculatue the vectors on the scanne you just found using the translation (any match can give the translation) just on the rotation that was found
+// Find all scanners for the current scanner that match. If there are no matches, then go to the next scanner that has a rotation.
+// Once all scanner have a rotation:
+// Once you do that, you can go through the rotated and tranlated beacons, using the x,y,z values as the unique identifier to find all the unique beacons.

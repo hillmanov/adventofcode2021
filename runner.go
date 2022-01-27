@@ -160,8 +160,6 @@ func runDay(day string) ([]RunResult, error) {
 	part2Result.Solution = part2()
 	part2Result.EndTime = time.Now()
 
-	// wg.Wait()
-
 	return []RunResult{part1Result, part2Result}, nil
 }
 
