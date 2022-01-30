@@ -5,7 +5,6 @@ import (
 	"embed"
 	"fmt"
 	"math"
-	"sort"
 	"strings"
 )
 
@@ -19,7 +18,7 @@ type Scanner struct {
 	Z               int
 	Beacons         []Beacon
 	BeaconRotations [][]Beacon
-	RotationVectors [][]VectorPair
+	RotationVectors [][]Vector
 	Rotation        int
 }
 
@@ -29,13 +28,13 @@ type Beacon struct {
 	Z int
 }
 
-type VectorPair struct {
+type Vector struct {
+	Value   float64
 	BeaconA Beacon
 	BeaconB Beacon
-	Value   float64
 }
 
-func (s *Scanner) DoRotations() {
+func (s *Scanner) InitRotations() {
 	s.BeaconRotations = [][]Beacon{}
 	for i := 0; i < 24; i++ {
 		s.BeaconRotations[i] = make([]Beacon, len(s.Beacons))
@@ -45,10 +44,10 @@ func (s *Scanner) DoRotations() {
 	}
 }
 
-func (s *Scanner) DoVectors() {
-	s.RotationVectors = [][]VectorPair{}
+func (s *Scanner) InitVectors() {
+	s.RotationVectors = [][]Vector{}
 	for rotation := range s.BeaconRotations {
-		s.RotationVectors[rotation] = []VectorPair{}
+		s.RotationVectors[rotation] = []Vector{}
 		for i := range s.BeaconRotations[rotation] {
 			for j := range s.BeaconRotations[rotation] {
 				if i == j {
@@ -56,14 +55,14 @@ func (s *Scanner) DoVectors() {
 				}
 
 				s.RotationVectors[rotation] = append(s.RotationVectors[rotation],
-					VectorPair{
-						BeaconA: s.BeaconRotations[rotation][i],
-						BeaconB: s.BeaconRotations[rotation][j],
+					Vector{
 						Value: math.Sqrt(
 							math.Pow(float64(s.BeaconRotations[rotation][i].X)-float64(s.BeaconRotations[rotation][j].X), 2) +
 								math.Pow(float64(s.BeaconRotations[rotation][i].Y)-float64(s.BeaconRotations[rotation][j].Y), 2) +
 								math.Pow(float64(s.BeaconRotations[rotation][i].Z)-float64(s.BeaconRotations[rotation][j].Z), 2),
 						),
+						BeaconA: s.BeaconRotations[rotation][i],
+						BeaconB: s.BeaconRotations[rotation][j],
 					},
 				)
 			}
@@ -124,43 +123,6 @@ func (b Beacon) Rotate(rotation int) Beacon {
 	default:
 		panic("Unsupported rotate value")
 	}
-}
-
-func (s Scanner) Vectors() map[float64]VectorPair {
-	vectors := map[float64]VectorPair{}
-
-	for i := 0; i < len(s.Beacons)-1; i++ {
-		for j := i + 1; j < len(s.Beacons)-1; j++ {
-			if i == j {
-				continue
-			}
-			vectors[math.Sqrt(
-				math.Pow(float64(s.Beacons[i].X)-float64(s.Beacons[j].X), 2)+
-					math.Pow(float64(s.Beacons[i].Y)-float64(s.Beacons[j].Y), 2)+
-					math.Pow(float64(s.Beacons[i].Z)-float64(s.Beacons[j].Z), 2),
-			)] = VectorPair{
-				BeaconA: s.Beacons[i],
-				BeaconB: s.Beacons[j],
-			}
-		}
-	}
-
-	return vectors
-}
-
-func CalculateVectors(beacons []Beacon) []float64 {
-	vectors := []float64{}
-	origin := beacons[0]
-	for _, b := range beacons[1:] {
-		vector := math.Sqrt(
-			math.Pow(float64(b.X)-float64(origin.X), 2) +
-				math.Pow(float64(b.Y)-float64(origin.Y), 2) +
-				math.Pow(float64(b.Z)-float64(origin.Z), 2),
-		)
-		vectors = append(vectors, vector)
-	}
-	sort.Float64s(vectors)
-	return vectors
 }
 
 func Part1() Any {
