@@ -35,7 +35,7 @@ type Vector struct {
 }
 
 func (s *Scanner) InitRotations() {
-	s.BeaconRotations = [][]Beacon{}
+	s.BeaconRotations = make([][]Beacon, 24)
 	for i := 0; i < 24; i++ {
 		s.BeaconRotations[i] = make([]Beacon, len(s.Beacons))
 		for j, b := range s.Beacons {
@@ -45,9 +45,9 @@ func (s *Scanner) InitRotations() {
 }
 
 func (s *Scanner) InitVectors() {
-	s.RotationVectors = [][]Vector{}
+	s.RotationVectors = make([][]Vector, 24)
 	for rotation := range s.BeaconRotations {
-		s.RotationVectors[rotation] = []Vector{}
+		s.RotationVectors[rotation] = make([]Vector, len(s.Beacons)*len(s.Beacons))
 		for i := range s.BeaconRotations[rotation] {
 			for j := range s.BeaconRotations[rotation] {
 				if i == j {
@@ -68,6 +68,18 @@ func (s *Scanner) InitVectors() {
 			}
 		}
 	}
+}
+
+func (s *Scanner) IsSettled() bool {
+	return s.Rotation >= 0
+}
+
+func (s *Scanner) SettledVectors() []Vector {
+	return s.RotationVectors[s.Rotation]
+}
+
+func (s *Scanner) SettledBeacons() []Beacon {
+	return s.BeaconRotations[s.Rotation]
 }
 
 func (b Beacon) Rotate(rotation int) Beacon {
@@ -126,8 +138,33 @@ func (b Beacon) Rotate(rotation int) Beacon {
 }
 
 func Part1() Any {
-	// scanners := getInput()
-	// s := scanners[0]
+	scanners := getInput()
+
+	for i := range scanners {
+		scanners[i].InitRotations()
+		scanners[i].InitVectors()
+	}
+
+	homeScanner := scanners[0]
+	homeScanner.Rotation = 0
+
+	for i := range scanners {
+		scanner := scanners[i]
+		if scanner.IsSettled() || i == 0 {
+			continue
+		}
+
+		for rotationVectorsIndex := range scanner.RotationVectors {
+			if len((intersection(homeScanner.SettledVectors(), scanner.RotationVectors[rotationVectorsIndex]))) >= 12 {
+				scanner.Rotation = rotationVectorsIndex
+				fmt.Println("Oh baby!")
+				fmt.Printf("i = %+v\n", i)
+				fmt.Printf("rotationVectorsIndex = %+v\n", rotationVectorsIndex)
+				break
+			}
+		}
+
+	}
 
 	// fmt.Printf("s.Vectors() = %+v\n", s.Vectors())
 
@@ -188,6 +225,7 @@ func getOffset(v [][2]Vector) (x, y, z int) {
 		v[0][0].BeaconA.Y - v[0][1].BeaconA.Y,
 		v[0][0].BeaconA.Z - v[0][1].BeaconA.Z
 }
+
 func main() {
 	part1Solution := Part1()
 	part2Solution := Part2()
