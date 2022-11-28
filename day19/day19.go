@@ -183,11 +183,23 @@ loop:
 
 			for rotationVectorsIndex := range unsettledScanner.RotationVectors {
 				intersections := intersection(settledScanner.SettledVectors(), unsettledScanner.RotationVectors[rotationVectorsIndex])
-				if len(intersections) >= 12 {
+
+				// This is at least partially better than before. Without THIS check, the number of unique beacons is too low.
+				uniqueBeacons := make(map[Beacon]struct{})
+				for _, v := range intersections {
+					uniqueBeacons[v[0].Beacon] = struct{}{}
+				}
+
+				if len(uniqueBeacons) >= 12 {
 					offsetX, offsetY, offsetZ := getOffset(intersections[0])
 
+					fmt.Printf("settledScanner: %d \n", settledScanner.Label)
+					fmt.Printf("unsettledScanner: %d \n", unsettledScanner.Label)
 					fmt.Printf("rotationVectorsIndex = %+v\n", rotationVectorsIndex)
-					fmt.Printf("offsetX, offsetY, offsetZ = %d %d %d\n", offsetX, offsetY, offsetZ)
+					for b := range uniqueBeacons {
+						fmt.Printf("%+v\n", b)
+					}
+					fmt.Printf("offsetX, offsetY, offsetZ = %d %d %d\n\n", offsetX, offsetY, offsetZ)
 
 					unsettledScanner.Rotation = rotationVectorsIndex
 					unsettledScanner.Settled = true
