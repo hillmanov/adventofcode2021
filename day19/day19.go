@@ -17,19 +17,20 @@ type Scanner struct {
 	Z               int
 	Beacons         []Beacon
 	BeaconRotations [][]Beacon
-	RotationVectors [][]Vector
+	RotationVectors [][]DistanceVector
 	Rotation        int
 	Settled         bool
+	Vector          Vector
 }
 
-type Dist struct {
+type Vector struct {
 	X int
 	Y int
 	Z int
 }
 
-func (d Dist) Equals(o Dist) bool {
-	return d.X == o.X && d.Y == o.Y && d.Z == o.Z
+func (v Vector) Equals(o Vector) bool {
+	return v.X == o.X && v.Y == o.Y && v.Z == o.Z
 }
 
 type Beacon struct {
@@ -38,12 +39,16 @@ type Beacon struct {
 	Z int
 }
 
-func (b Beacon) Dist(o Beacon) Dist {
-	return Dist{
+func (b Beacon) Vector(o Beacon) Vector {
+	return Vector{
 		X: b.X - o.X,
 		Y: b.Y - o.Y,
 		Z: b.Z - o.Z,
 	}
+}
+
+func (s *Scanner) ManhattanDistance(o *Scanner) int {
+	return Abs(s.Vector.X-o.Vector.X) + Abs(s.Vector.Y-o.Vector.Y) + Abs(s.Vector.Z-o.Vector.Z)
 }
 
 func (b Beacon) Equals(o Beacon) bool {
@@ -52,15 +57,15 @@ func (b Beacon) Equals(o Beacon) bool {
 		b.Z == o.Z
 }
 
-func (b *Beacon) ApplyOffset(x, y, z int) {
-	b.X = b.X + x
-	b.Y = b.Y + y
-	b.Z = b.Z + z
+func (b *Beacon) ApplyOffset(v Vector) {
+	b.X = b.X + v.X
+	b.Y = b.Y + v.Y
+	b.Z = b.Z + v.Z
 }
 
-type Vector struct {
-	Dist   Dist
-	Beacon Beacon
+type DistanceVector struct {
+	Vector Vector
+	Origin Beacon
 }
 
 func (s *Scanner) InitRotations() {
@@ -74,9 +79,9 @@ func (s *Scanner) InitRotations() {
 }
 
 func (s *Scanner) InitVectors() {
-	s.RotationVectors = make([][]Vector, 24)
+	s.RotationVectors = make([][]DistanceVector, 24)
 	for rotation := range s.BeaconRotations {
-		s.RotationVectors[rotation] = []Vector{}
+		s.RotationVectors[rotation] = []DistanceVector{}
 		for i := range s.BeaconRotations[rotation] {
 			for j := range s.BeaconRotations[rotation] {
 				if i == j {
@@ -84,9 +89,9 @@ func (s *Scanner) InitVectors() {
 				}
 
 				s.RotationVectors[rotation] = append(s.RotationVectors[rotation],
-					Vector{
-						Dist:   s.BeaconRotations[rotation][i].Dist(s.BeaconRotations[rotation][j]),
-						Beacon: s.BeaconRotations[rotation][i],
+					DistanceVector{
+						Vector: s.BeaconRotations[rotation][i].Vector(s.BeaconRotations[rotation][j]),
+						Origin: s.BeaconRotations[rotation][i],
 					},
 				)
 			}
@@ -98,7 +103,7 @@ func (s *Scanner) IsSettled() bool {
 	return s.Settled
 }
 
-func (s *Scanner) SettledVectors() []Vector {
+func (s *Scanner) SettledVectors() []DistanceVector {
 	return s.RotationVectors[s.Rotation]
 }
 
@@ -161,7 +166,8 @@ func (b Beacon) Rotate(rotation int) Beacon {
 	}
 }
 
-func Part1() Any {
+func solve() (int, int) {
+
 	scanners := getInput()
 
 	for i := range scanners {
@@ -169,52 +175,58 @@ func Part1() Any {
 		scanners[i].InitVectors()
 	}
 
-	scanners[0].Rotation = 0
 	scanners[0].Settled = true
+	scanners[0].Rotation = 0
 
 	settledScanners := []*Scanner{scanners[0]}
+	settledScanner := scanners[0]
 
-loop:
-	unsettledScanners := getUnsettledScanners(scanners)
-	for i := range unsettledScanners {
-		unsettledScanner := unsettledScanners[i]
-		for j := range settledScanners {
-			settledScanner := settledScanners[j]
+	baseScannerIndex := 0
+	allRotated := false
+	for !allRotated {
 
-			for rotationVectorsIndex := range unsettledScanner.RotationVectors {
-				intersections := intersection(settledScanner.SettledVectors(), unsettledScanner.RotationVectors[rotationVectorsIndex])
+		for i := range scanners {
+			unsettledScanner := scanners[i]
+			if !unsettledScanner.IsSettled() {
+				for rotationVectorsIndex := range unsettledScanner.RotationVectors {
+					intersections := intersections(settledScanner.SettledVectors(), unsettledScanner.RotationVectors[rotationVectorsIndex])
 
-				// This is at least partially better than before. Without THIS check, the number of unique beacons is too low.
-				uniqueBeacons := make(map[Beacon]struct{})
-				for _, v := range intersections {
-					uniqueBeacons[v[0].Beacon] = struct{}{}
+					if len(intersections) >= 12 {
+						vector := calculateVector(intersections[0])
+
+						unsettledScanner.Settled = true
+						unsettledScanner.Rotation = rotationVectorsIndex
+						unsettledScanner.Beacons = unsettledScanner.BeaconRotations[rotationVectorsIndex]
+						unsettledScanner.Vector = vector
+
+						for i := range unsettledScanner.Beacons {
+							unsettledScanner.Beacons[i].ApplyOffset(vector)
+						}
+
+						unsettledScanner.InitVectors()
+
+						settledScanners = append(settledScanners, unsettledScanner)
+						break
+					}
 				}
+			}
+		}
 
-				if len(uniqueBeacons) >= 12 {
-					offsetX, offsetY, offsetZ := getOffset(intersections[0])
+		allRotated = true
+		for _, s := range scanners {
+			allRotated = allRotated && s.IsSettled()
+		}
 
-					fmt.Printf("settledScanner: %d \n", settledScanner.Label)
-					fmt.Printf("unsettledScanner: %d \n", unsettledScanner.Label)
-					fmt.Printf("rotationVectorsIndex = %+v\n", rotationVectorsIndex)
-					for b := range uniqueBeacons {
-						fmt.Printf("%+v\n", b)
-					}
-					fmt.Printf("offsetX, offsetY, offsetZ = %d %d %d\n\n", offsetX, offsetY, offsetZ)
+		if !allRotated {
+			baseScannerIndex++
+			if baseScannerIndex >= len(scanners) {
+				baseScannerIndex = 0
+			}
 
-					unsettledScanner.Rotation = rotationVectorsIndex
-					unsettledScanner.Settled = true
-					unsettledScanner.Beacons = unsettledScanner.BeaconRotations[rotationVectorsIndex]
-
-					for i := range unsettledScanner.Beacons {
-						unsettledScanner.Beacons[i].ApplyOffset(offsetX, offsetY, offsetZ)
-					}
-
-					unsettledScanner.InitRotations()
-					unsettledScanner.InitVectors()
-
-					settledScanners = append(settledScanners, unsettledScanner)
-
-					goto loop
+			for ; baseScannerIndex < len(scanners); baseScannerIndex++ {
+				if scanners[baseScannerIndex].IsSettled() {
+					settledScanner = scanners[baseScannerIndex]
+					break
 				}
 			}
 		}
@@ -227,15 +239,62 @@ loop:
 		}
 	}
 
-	fmt.Printf("len(uniques) = %+v\n", len(uniques))
+	// find max manhattan distance between each scanner
+	maxDistance := 0
+	for i := range scanners {
+		for j := range scanners {
+			if i == j {
+				continue
+			}
 
-	fmt.Println("Done")
+			distance := scanners[i].ManhattanDistance(scanners[j])
+			fmt.Printf("Scanner %d and %d are %d apart\n", i, j, distance)
+			if distance > maxDistance {
+				maxDistance = distance
+			}
+		}
+	}
 
-	return nil
+	return len(uniques), maxDistance
 }
 
-func Part2() Any {
-	return nil
+func Part1(solution int) Any {
+	return solution
+}
+
+func Part2(solution int) Any {
+	return solution
+}
+
+func intersections(origin, target []DistanceVector) [][2]DistanceVector {
+	intersecting := [][2]DistanceVector{}
+	for _, v1 := range origin {
+		for _, v2 := range target {
+			if v1.Vector.Equals(v2.Vector) {
+				intersecting = append(intersecting, [2]DistanceVector{v1, v2})
+			}
+		}
+	}
+
+	return intersecting
+}
+
+func calculateVector(v [2]DistanceVector) Vector {
+	return Vector{
+		X: v[0].Origin.X - v[1].Origin.X,
+		Y: v[0].Origin.Y - v[1].Origin.Y,
+		Z: v[0].Origin.Z - v[1].Origin.Z,
+	}
+}
+
+func main() {
+	solution1, solution2 := solve()
+
+	part1Solution := Part1(solution1)
+	part2Solution := Part2(solution2)
+
+	fmt.Printf("Day 19: Part 1: = %+v\n", part1Solution)
+	fmt.Printf("Day 19: Part 2: = %+v\n", part2Solution)
 }
 
 func getInput() []*Scanner {
@@ -264,45 +323,7 @@ func getInput() []*Scanner {
 			currentScanner.Beacons = append(currentScanner.Beacons, beacon)
 		}
 	}
-	currentScanner.Beacons = append(currentScanner.Beacons, beacon)
 	scanners = append(scanners, currentScanner)
 
 	return scanners
-}
-
-func intersection(origin, target []Vector) [][2]Vector {
-	intersecting := [][2]Vector{}
-	for _, v1 := range origin {
-		for _, v2 := range target {
-			if v1.Dist.Equals(v2.Dist) {
-				intersecting = append(intersecting, [2]Vector{v1, v2})
-			}
-		}
-	}
-
-	return intersecting
-}
-
-func getUnsettledScanners(scanners []*Scanner) []*Scanner {
-	unsettled := []*Scanner{}
-	for i := range scanners {
-		if !scanners[i].IsSettled() {
-			unsettled = append(unsettled, scanners[i])
-		}
-	}
-	return unsettled
-}
-
-func getOffset(v [2]Vector) (x, y, z int) {
-	return v[0].Beacon.X - v[1].Beacon.X,
-		v[0].Beacon.Y - v[1].Beacon.Y,
-		v[0].Beacon.Z - v[1].Beacon.Z
-}
-
-func main() {
-	part1Solution := Part1()
-	part2Solution := Part2()
-
-	fmt.Printf("Day 19: Part 1: = %+v\n", part1Solution)
-	fmt.Printf("Day 19: Part 2: = %+v\n", part2Solution)
 }
