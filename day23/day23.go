@@ -2,7 +2,6 @@ package main
 
 import (
 	. "adventofcode/utils"
-	"container/heap"
 	"embed"
 	"fmt"
 )
@@ -26,88 +25,34 @@ func main() {
 	fmt.Printf("Day 23: Part 2: = %+v\n", part2Solution)
 }
 
-// Code lifted and modified from this implementation: https://github.com/beefsack/go-astar
-type Pather interface {
-	// PathNeighbors returns the direct neighboring nodes of this node which can be pathed to.
-	PathNeighbors() []Pather
-	// PathNeighborCost calculates the exact movement cost to neighbor nodes.
-	PathNeighborCost(to Pather) float64
-	// PathEstimatedCost is a heuristic method for estimating movement costs between non-adjacent nodes.
-	PathEstimatedCost(to Pather) float64
-}
+// What I need to do is make the entire WORLD a Pather. Not each node. I need to be able to calculate the cost of every possible movement at any step.
 
-// node is a wrapper to store A* data for a Pather node.
-type node struct {
-	pather Pather
-	cost   float64
-	rank   float64
-	parent *node
-	open   bool
-	closed bool
-	index  int
-}
+// When finding paths, keep the following rules in mind!
+// Amphipods will never stop on the space immediately outside any room.
+// They can move into that space so long as they immediately continue moving.
+// (Specifically, this refers to the four open spaces in the hallway that are directly above an amphipod starting position.)
 
-// nodeMap is a collection of nodes keyed by Pather nodes for quick reference.
-type nodeMap map[Pather]*node
+// Amphipods will never move from the hallway into a room unless that room is their destination room and that room contains no amphipods which do not also have that room as their own destination.
+// If an amphipod's starting room is not its destination room, it can stay in that room until it leaves the room.
+// (For example, an Amber amphipod will not move from the hallway into the right three rooms, and will only move into the leftmost room if that room is empty or if it only contains other Amber amphipods.)
 
-// get gets the Pather object wrapped in a node, instantiating if required.
-func (nm nodeMap) get(p Pather) *node {
-	n, ok := nm[p]
-	if !ok {
-		n = &node{
-			pather: p,
-		}
-		nm[p] = n
-	}
-	return n
-}
+// Once an amphipod stops moving in the hallway, it will stay in that spot until it can move into a room.
+// (That is, once any amphipod starts moving, any other amphipods currently in the hallway are locked in place and will not move again until they can move fully into a room.)
 
-// Path calculates a short path and the distance between the two Pather nodes.
-//
-// If no path is found, found will be false.
-func Path(from, to Pather) (path []Pather, distance float64, found bool) {
-	nm := nodeMap{}
-	nq := &priorityQueue{}
-	heap.Init(nq)
-	fromNode := nm.get(from)
-	fromNode.open = true
-	heap.Push(nq, fromNode)
-	for {
-		if nq.Len() == 0 {
-			return
-		}
-		current := heap.Pop(nq).(*node)
-		current.open = false
-		current.closed = true
-
-		if current == nm.get(to) {
-			// Found a path to the goal.
-			p := []Pather{}
-			curr := current
-			for curr != nil {
-				p = append(p, curr.pather)
-				curr = curr.parent
-			}
-			return p, current.cost, true
-		}
-
-		for _, neighbor := range current.pather.PathNeighbors() {
-			cost := current.cost + current.pather.PathNeighborCost(neighbor)
-			neighborNode := nm.get(neighbor)
-			if cost < neighborNode.cost {
-				if neighborNode.open {
-					heap.Remove(nq, neighborNode.index)
-				}
-				neighborNode.open = false
-				neighborNode.closed = false
-			}
-			if !neighborNode.open && !neighborNode.closed {
-				neighborNode.cost = cost
-				neighborNode.open = true
-				neighborNode.rank = cost + neighbor.PathEstimatedCost(to)
-				neighborNode.parent = current
-				heap.Push(nq, neighborNode)
-			}
-		}
-	}
-}
+// Do I want to try to represent the world like this:
+// AABBCCDD...........
+// And do the math? Would be a lot faster...
+// Could create quick references to specific positions:
+/*
+0 - HomeA1
+1 - homeA2
+2 - homeB1
+3 - homeB2
+4 - ...
+5
+6
+7
+8 - hallway1
+9 - entryway1
+10
+*/
